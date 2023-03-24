@@ -8,6 +8,13 @@
     $conexion = mysqli_connect($server,$user,$pass);
 
     //Conectamos con la base de datos
+    $consulta = 'CREATE DATABASE IF NOT EXISTS '.$db_name.';';
+    $result = mysqli_query($conexion,$consulta);
+
+    $consulta = 'SET SQL_SAFE_UPDATES = 0;';
+    $result = mysqli_query($conexion,$consulta);
+
+    //Conectamos con la base de datos
     $consulta = 'USE '.$db_name.';';
     $result = mysqli_query($conexion,$consulta);
         //echo($result);
