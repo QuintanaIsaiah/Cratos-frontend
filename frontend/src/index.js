@@ -4,8 +4,8 @@ import Main from "./Main/index";
 import NavBar from "./shared/NavBar";
 import Footer from "./shared/Footer";
 import Login from "./Inicio/Login";
+import Register from "./Inicio/Register";
 // import Inicio from "./Inicio";
-// import Register from "./Inicio/Register";
 // import Main from "./Main";
 // import MainAdmin from "./MainAdmin";
 
@@ -18,12 +18,13 @@ root.render(
     <Routes>
     <Route path="/" element={<Main />}></Route>
     <Route path="/Login" element={<Login />}></Route>
+    <Route path="/Register" element={<Register />}></Route>
       {/* <Route path="/" element={<Inicio />}></Route>
       <Route path="/Login" element={<Login />}></Route>
       <Route path="/Register" element={<Register />}></Route>
       <Route path="/Main" element={<Main />}></Route>
       <Route path="/MainAdmin" element={<MainAdmin />}></Route> */}
     </Routes>
-    <Footer />
+    {/* <Footer /> */}
   </BrowserRouter>
 );

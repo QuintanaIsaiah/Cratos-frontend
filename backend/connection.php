@@ -2,7 +2,7 @@
     $server = "localhost";
     $user = "root";
     $pass = "";
-    $db_name = "usuarios";
+    $db_name = "cratos_db";
 
     //Conectamos con el servidor
     $conexion = mysqli_connect($server,$user,$pass);

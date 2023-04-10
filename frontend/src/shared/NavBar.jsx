@@ -10,6 +10,7 @@ const NavBar = () => {
     <div className="NavBarContainer">
       <span>CRATOS</span>
       <Link to={"/Login"} className="linkLogin">Log In</Link>
+      <Link to={"/Register"} className="linkLogin">Register</Link>
     </div>
   );
 };
