@@ -1,6 +1,7 @@
 import { Form, Alert, FormGroup, Label, Input, Button } from "reactstrap";
 import { useState } from "react";
 import axios from "axios";
+import {USER_REGISTER_URL}from "../shared/routes.js";
 
 const Register = () => {
   const [completado, setCompletado] = useState("");
@@ -20,6 +21,7 @@ const Register = () => {
   const handlePassword1Change = (event) => setPassword1(event.target.value);
   const handlePassword2Change = (event) => setPassword2(event.target.value);
 
+  // Funcion para ocultar alertas
   const hideAlerts = () => {
     setTimeout(() => {
       setCompletado("");
@@ -27,9 +29,11 @@ const Register = () => {
     }, 5000);
   };
 
+  // Form submit
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    // VALIDACIONES
     // Se comprueban campos rellenos
     if (
       !nombre ||
@@ -51,17 +55,19 @@ const Register = () => {
       return;
     }
 
+    // Creo objeto para enviar al back
     const data = {
       nombre: nombre,
       apellido1: apellido1,
       apellido2: apellido2,
+      edad: 0,
       email: email,
       password: password1,
     };
 
-    // Se envia la informacion al servidor
+    // PETICION POST
     try {
-      const response = await axios.post("http://localhost:3306", data, {
+      const response = await axios.post(USER_REGISTER_URL, data, {
         headers: {
           "Content-Type": "application/json",
         },

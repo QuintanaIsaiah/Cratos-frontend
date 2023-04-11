@@ -1,0 +1,1 @@
+export const USER_REGISTER_URL = "http://localhost/Cratos-backend/Register.php";
