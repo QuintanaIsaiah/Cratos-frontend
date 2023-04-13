@@ -44,3 +44,17 @@ code {
 .footer a:hover {
   text-decoration: underline;
 }
+
+/* Main */
+.m-banner{
+  border:1px solid black; 
+  height: 100px;
+}
+.m-ofertas{
+  border:1px solid grey;
+  height: 400px;
+}
+.m-productos{
+  border:1px solid blue;
+  height:800px;
+}
