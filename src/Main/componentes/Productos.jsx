@@ -26,6 +26,13 @@ const Productos = () => {
     function actualizarProductos(){
         getProductos();
     }
+
+    //Creamos función para añadir productos recibiendo su id por parametro (onclick={()=>añadir(lista[0])})
+    function añadirProducto(id){
+        console.log("La id que quieres añadir es : "+id);
+
+        //axios enviar id a insertar_carro.php para hacer insert
+    }
     
     return (
         <div>
@@ -38,10 +45,11 @@ const Productos = () => {
                             <div className="div_producto" key={key}>
                                 <div className="p_titulo"><h3>{listado[1]}</h3></div>
                                 <div className="p_img">{listado[1]+".png"}</div>
-                                <div className="p_descripcion">{listado[3]}</div>
+                                <div id="prueba" className="p_descripcion">{listado[3]}</div>
+                                <div className="p_precio">Precio : {listado[4]+"€"}</div>
                                 <ul className="p_botones">
                                     <li>cat: {listado[2]}</li>
-                                    <li><input type="button" id="añadir" name="añadir" value="AÑADIR AL CARRO"></input></li>
+                                    <li><input type="button" id="añadir" name="añadir" value="AÑADIR AL CARRO" onClick={()=> añadirProducto(listado[0])}></input></li>
                                     <li><input type="button" id="ver" name="ver" value="VER"></input></li>
                                 </ul>
                             </div>
