@@ -18,12 +18,34 @@ code {
   padding: 10px;
 }
 
-.linkLogin{
-  text-decoration: none !important;
-  color: inherit !important;
-  border:solid 1px;
-  padding: 3px;
-}
+  /* Carro */
+  .c-caja{
+    background-color: antiquewhite;
+  }
+    .c-conetendor{
+      background-color: grey;
+      padding-top:20px
+    }
+      .c-conetendor div{
+        display: inline-flex;
+        background-color: red;
+        width: 100%;      
+        height: 150px;
+        align-items: center;
+        text-align: center;
+      }
+        .c-lista div{
+          margin: 2%;
+        }
+
+        
+
+  .linkLogin{
+    text-decoration: none !important;
+    color: inherit !important;
+    border:solid 1px;
+    padding: 3px;
+  }
 
 .footerContainer {
   background-color: #f2f2f2;
@@ -56,7 +78,6 @@ code {
 }
 .m-productos{
   border:1px solid blue;
-  height:800px;
 }
 
   /* Todos los productos */
@@ -105,3 +126,7 @@ code {
         display:inline-flex;
         margin-right: 10%;
       }
+.m-categorias{
+  border:1px solid green; 
+}
+

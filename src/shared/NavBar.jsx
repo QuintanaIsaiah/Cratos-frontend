@@ -11,6 +11,7 @@ const NavBar = () => {
       <span>CRATOS</span>
       <Link to={"/Login"} className="linkLogin">Log In</Link>
       <Link to={"/Register"} className="linkLogin">Register</Link>
+      <Link to={"/Carro"} className="linkLogin">Carro</Link>
     </div>
   );
 };

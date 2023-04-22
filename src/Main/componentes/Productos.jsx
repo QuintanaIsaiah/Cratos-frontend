@@ -29,9 +29,18 @@ const Productos = () => {
 
     //Creamos función para añadir productos recibiendo su id por parametro (onclick={()=>añadir(lista[0])})
     function añadirProducto(id){
-        console.log("La id que quieres añadir es : "+id);
 
-        //axios enviar id a insertar_carro.php para hacer insert
+        axios.post("http://localhost/Cratos-backend/a%C3%B1adirAcarro.php",id)
+            .then(function (resultado){
+                console.log(resultado.data);
+
+                if(resultado.data === 1){
+                    alert("Producto añadido al carro");
+                }
+                else{
+                    alert("No se ha podido añadir el producto al carro");
+                }
+            })
     }
     
     return (
