@@ -72,10 +72,102 @@ code {
   border:1px solid black; 
   height: 100px;
 }
+
+
 .m-ofertas{
   border:1px solid grey;
-  height: 400px;
 }
+.contenedor_ofertas{
+  background-color: grey;
+  display:inline-block;
+  text-align: center;
+  width: 100%;
+}
+
+  .div_ofertas{
+    border: 1px solid black;
+    background-color:antiquewhite;
+    height: 520px;
+    width:50%;
+    display:inline-block;
+    text-align: center;
+}
+
+  .o_cont1{
+    background-color: grey;
+    width: 50%;
+    height:100%;
+    display:inline-block;
+    vertical-align: top;
+  }
+  .o_cont2{
+    width: 50%;
+    height: 100%;
+    display: inline-block;
+  }
+    .o_titulo{
+      display: inline-block;
+      width: 100%;
+      padding: 10px;
+    }
+    .o_descripcion{
+      text-align: left;
+      height: 230px;
+      padding: 10px;
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-top: 20px;
+      font-size: 18px;
+    }
+    .o_precio{
+      font-size: 18px;
+      text-decoration: line-through;
+      padding: 5px;
+    }
+    .o_porcentaje{
+      border: 0.5px solid black;
+      background-color: red;
+      width: 100%;
+      border-radius: 20px;
+      padding: 2px;
+      font-size: 20px;
+    }
+    .o_total{
+      font-size: 22px;
+      padding: 10px;
+      font-weight:500;
+    }
+    .o_botones{
+      text-decoration: none;
+      display: inline-block;
+      width: 100%;
+      padding: 5px;
+      list-style: none;
+    }
+      .o_botones li{
+        padding: 2px;
+      }
+
+
+  
+.m-categorias{
+  background-color: greenyellow;
+  display: inline-block;
+  width: 100%;
+}
+  .m-categorias div{
+    display: inline-flex;
+    background-color: red;
+    margin-left: 10%;
+  }
+
+
+.ocultar{
+  display: none;
+}
+
+
+
 .m-productos{
   border:1px solid blue;
 }
