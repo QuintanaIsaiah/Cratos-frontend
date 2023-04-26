@@ -40,7 +40,6 @@ const Login = () => {
         },
       });
 
-      console.log(response);
       if (response.data.code === 0){
         setCompletado("Inicio de sesion correcto.");
       }else {

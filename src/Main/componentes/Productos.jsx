@@ -17,7 +17,7 @@ const Productos = () => {
     axios
       .get("http://localhost/Cratos-backend/productos.php")
       .then(function (resultado) {
-        console.log(resultado);
+        // console.log(resultado);
         setProductos({ lista: resultado.data });
       });
   }
@@ -32,7 +32,7 @@ const Productos = () => {
     axios
       .post("http://localhost/Cratos-backend/a%C3%B1adirAcarro.php", id)
       .then(function (resultado) {
-        console.log(resultado.data);
+        // console.log(resultado.data);
 
         if (resultado.data === 1) {
           alert("Producto añadido al carro");
