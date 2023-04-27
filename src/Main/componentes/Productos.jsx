@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
+
 const Productos = () => {
   const [productos, setProductos] = useState({
     lista: [],
@@ -42,6 +43,11 @@ const Productos = () => {
       });
   }
 
+
+  //Creamos constante donde almacene la imagenes en una variable 
+  const productosImg = require.context("../img",true);
+
+
   return (
     <div>
       <h2 onClick={actualizarProductos}>Todos los productos</h2>
@@ -52,7 +58,16 @@ const Productos = () => {
             <div className="p_titulo">
               <h3>{listado[1]}</h3>
             </div>
-            <div className="p_img">{listado[1] + ".png"}</div>
+
+            <div className="p_img">
+              {listado[1] && productosImg.keys().includes(`./${listado[1]}.jpg`) ? (
+                <img className="p_img_size" src={productosImg(`./${listado[1]}.jpg`)} alt="Producto" />
+              ) : (
+                <p>Imagen no encontrada</p>
+              )}
+            </div>
+        
+
             <div id="prueba" className="p_descripcion">
               {listado[3]}
             </div>
