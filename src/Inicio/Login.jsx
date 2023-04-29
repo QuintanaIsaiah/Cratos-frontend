@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Form, Button } from "rsuite";
 import axios from "axios";
 import { USER_LOGIN_URL } from "../shared/routes.js";
@@ -11,6 +11,8 @@ const Login = () => {
   const [completado, setCompletado] = useState("");
   const [error, setError] = useState("");
 
+  
+
   const hideAlerts = () => {
     setTimeout(() => {
       setCompletado("");
@@ -19,27 +21,17 @@ const Login = () => {
   };
 
   const handleSubmit = async (event) => {
-    // Recojo info del form
-    const formData = new FormData(event.target);
-    const nombreUsuario = formData.get("name");
-    const contrasenyaUsuario = formData.get("contrasenya");
-    // Setteo variables
-    setUsuario(nombreUsuario);
-    setContrasenya(contrasenyaUsuario);
-
-    // Creo objeto para peticion POST de login
-    const data = {
-      usuario: usuario,
-      contrasenya: contrasenya,
-    };
-    // Consulto al servidor
     try {
-      const response = await axios.post(USER_LOGIN_URL, data, {
+      const response = await axios.post(USER_LOGIN_URL, {
+        usuario: usuario,
+        contrasenya: contrasenya,
+      }, {
         headers: {
           "Content-Type": "application/json",
         },
       });
 
+      console.log(response);
       if (response.data.code === 0){
         setCompletado("Inicio de sesion correcto.");
       }else {

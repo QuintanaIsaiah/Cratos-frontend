@@ -6,16 +6,21 @@ import Categoria1 from "./componentes/Categoria1";
 import Categoria2 from "./componentes/Categoria2";
 import Categoria3 from "./componentes/Categoria3";
 import Ofertas from "./componentes/Ofertas";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Main = () => {
 
     // Llamo a connection.php para crear la db al cargar la web
-    axios.post(CONNECTION_URL)
-      .catch(error => {
-        // console.log(error);
-      });
-
+    useEffect(() => {
+        const crearDB = async () => {
+            try {
+                await axios.post(CONNECTION_URL);
+            } catch (error) {
+                // console.log(error);
+            }
+        };
+        crearDB();
+    }, []);
 
       //creamos un estado para la variable "categoriaSeleccionada" con un valor pordefecto
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("Productos");
