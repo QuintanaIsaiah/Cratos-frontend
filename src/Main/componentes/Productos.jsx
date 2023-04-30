@@ -66,7 +66,6 @@ const Productos = () => {
                 <p>Imagen no encontrada</p>
               )}
             </div>
-        
 
             <div id="prueba" className="p_descripcion">
               {listado[3]}
