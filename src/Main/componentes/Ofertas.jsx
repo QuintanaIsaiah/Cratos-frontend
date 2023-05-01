@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
+import { Link} from "react-router-dom";
 const Ofertas = () => {
 
     const [productos,setProductos] = useState({
@@ -65,7 +66,7 @@ const Ofertas = () => {
                                     <ul className="o_botones">
                                         <li>cat: {listado[2]}</li>
                                         <li><input type="button" id="añadir" name="añadir" value="AÑADIR AL CARRO" onClick={()=> añadirProducto(listado[0])}></input></li>
-                                        <li><input type="button" id="ver" name="ver" value="VER"></input></li>
+                                        <li><Link to="/detalle" className="ver-btn"><button type="button" id="ver" name="ver">VER</button></Link></li>
                                     </ul>
                                 </div>
                                 
