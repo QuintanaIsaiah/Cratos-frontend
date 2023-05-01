@@ -61,7 +61,7 @@ const Productos = () => {
 
             <div className="p_img">
               {listado[1] && productosImg.keys().includes(`./${listado[1]}.jpg`) ? (
-                <img className="p_img_size" src={productosImg(`./${listado[1]}.jpg`)} alt="Producto" />
+                <img className="p_img_size" src={productosImg(`./${listado[1]}.jpg`)} alt={listado[1]} />
               ) : (
                 <p>Imagen no encontrada</p>
               )}

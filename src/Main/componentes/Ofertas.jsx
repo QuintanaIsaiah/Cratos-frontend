@@ -42,6 +42,9 @@ const Ofertas = () => {
                 }
             })
     }
+
+    //Creamos constante donde almacene la imagenes en una variable 
+    const productosImg = require.context("../img",true);
     
     return (
         <div>
@@ -53,15 +56,24 @@ const Ofertas = () => {
                         productos.lista.map((listado,key) =>
                             <div className="div_ofertas" key={key}>
                                 <div className="o_cont1">
-                                    <div className="o_img">{listado[1]+".png"}</div>
+                                    <div className="o_titulo_img">
+                                        <h3>{listado[1]}</h3>    
+                                    </div>
+                                    <div className="o_img">      
+                                        {listado[1] && productosImg.keys().includes(`./${listado[1]}.jpg`) ? (
+                                            <img className="o_img" src={productosImg(`./${listado[1]}.jpg`)} alt={listado[1]} />
+                                        ) : (
+                                            <p>Imagen no encontrada</p>
+                                        )}
+                                    </div>
                                 </div>
                                 
                                 <div className="o_cont2">
-                                    <div className="o_titulo"><h3>{listado[1]}</h3></div>
+                                    <div className="o_titulo_descripcion"><h5>Descripción</h5></div>
                                     <div id="prueba" className="o_descripcion">{listado[3]}</div>
                                     <div className="o_precio">Precio : {listado[4]+"€"}</div>
-                                    <div className="o_porcentaje">OFERTA : {listado[5]+"%"}</div>
-                                    <div className="o_total">Precio Final : {listado[4]*listado[5]/100+"€"}</div>
+                                    <div className="o_porcentaje">OFERTA! {listado[5]+"% de descuento"}</div>
+                                    <div className="o_total">Precio Final : {listado[4]-(listado[4]*listado[5]/100)+"€"}</div>
                                     <ul className="o_botones">
                                         <li>cat: {listado[2]}</li>
                                         <li><input type="button" id="añadir" name="añadir" value="AÑADIR AL CARRO" onClick={()=> añadirProducto(listado[0])}></input></li>
