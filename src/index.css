@@ -14,8 +14,8 @@ code {
 }
 
 .NavBarContainer {
-  border: solid 1px red;
   padding: 10px;
+  background-color:#c0bfbf27;
 }
 
   /* Carro */
@@ -62,8 +62,8 @@ code {
   .linkLogin{
     text-decoration: none !important;
     color: inherit !important;
-    border:solid 1px;
     padding: 3px;
+
   }
 
 .footerContainer {
@@ -282,5 +282,43 @@ code {
       }
 .m-categorias{
   border:1px solid green; 
+}
+
+.NavBarContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #c0bfbf27;
+}
+
+.logo img{
+  width: 170px; /* cambiar el valor de acuerdo al tamaño deseado */
+  height: auto;
+  margin-left: 60px;
+}
+
+.navLinksContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 40px;
+}
+
+.navLinksContainer a {
+  text-decoration: none !important;
+  color: inherit !important;
+  padding: 10px;
+  margin: 0 5px;
+}
+
+/*Detalle.jsx*/
+
+.container_detalle{
+  background-color: grey;
+    display:inline-block;
+    padding-top: 50px;
+    text-align: center;
+
 }
 
