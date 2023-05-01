@@ -1,10 +1,15 @@
 import React from 'react';
+import Banner from './Banner';
 
-const Detalle = (props) => {
-  const { producto } = props.location.state;
 
-  // Resto del código para mostrar los detalles del producto
+const Detalle = () => {
+    return (
+    <div>
+      <Banner />
+      {/* Resto del código */}
+    </div>
+  );
+  
 };
-
 export default Detalle;
 
