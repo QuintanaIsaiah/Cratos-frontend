@@ -52,7 +52,7 @@ const Productos = () => {
 
   
 
-
+ //Prueba para ruta a Detalle.jsx: <Link to={`/Detalle/${listado[0]}`} className="ver-btn"></Link>
 
   return (
     <div>

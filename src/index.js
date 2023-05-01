@@ -23,12 +23,16 @@ root.render(
     <Route path="/Register" element={<Register />}></Route>
     <Route path="/Carro" element={<Carro/>}></Route>
     <Route path="/Detalle" element={<Detalle />} />
+    
+
 
       {/* <Route path="/" element={<Inicio />}></Route>
       <Route path="/Login" element={<Login />}></Route>
       <Route path="/Register" element={<Register />}></Route>
       <Route path="/Main" element={<Main />}></Route>
-      <Route path="/MainAdmin" element={<MainAdmin />}></Route> */}
+      <Route path="/MainAdmin" element={<MainAdmin />}></Route> 
+      <Route path="/Detalle/:id" component={Detalle} /> Prueba para link con producto a Detalle*/
+      }
     </Routes>
     {/* <Footer /> */}
   </BrowserRouter>
