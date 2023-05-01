@@ -89,7 +89,7 @@ const Productos = () => {
                 ></input>
               </li>
               <li>
-                <Link to="/detalle" className="ver-btn">
+                <Link to={"/Detalle"} className="ver-btn">
                   <button type="button" id="ver" name="ver">VER</button>
                 </Link>
               </li>

@@ -6,6 +6,7 @@ import NavBar from "./shared/NavBar";
 import Login from "./Inicio/Login";
 import Register from "./Inicio/Register";
 import Carro from "./Inicio/Carro";
+import Detalle from './Main/componentes/Detalle';
 // import Inicio from "./Inicio";
 // import Main from "./Main";
 // import MainAdmin from "./MainAdmin";
@@ -21,6 +22,7 @@ root.render(
     <Route path="/Login" element={<Login />}></Route>
     <Route path="/Register" element={<Register />}></Route>
     <Route path="/Carro" element={<Carro/>}></Route>
+    <Route path="/Detalle" element={<Detalle />} />
 
       {/* <Route path="/" element={<Inicio />}></Route>
       <Route path="/Login" element={<Login />}></Route>

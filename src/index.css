@@ -265,3 +265,13 @@ code {
   margin: 0 5px;
 }
 
+/*Detalle.jsx*/
+
+.container_detalle{
+  background-color: grey;
+    display:inline-block;
+    padding-top: 50px;
+    text-align: center;
+
+}
+

@@ -1,13 +1,22 @@
 import React from 'react';
-import Banner from './Banner';
+
 
 
 const Detalle = () => {
     return (
-    <div>
-      <Banner />
-      {/* Resto del código */}
+    <div className= 'container_detalle'>
+        <div className='foto_detalle'>
+
+        </div>
+        <div className='descripcion_detalle'>
+
+        </div>
+        <ul className='d_botones'>
+
+        </ul>
     </div>
+
+    
   );
   
 };
