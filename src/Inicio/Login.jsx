@@ -11,8 +11,6 @@ const Login = () => {
   const [completado, setCompletado] = useState("");
   const [error, setError] = useState("");
 
-  
-
   const hideAlerts = () => {
     setTimeout(() => {
       setCompletado("");
@@ -22,26 +20,45 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     try {
-      const response = await axios.post(USER_LOGIN_URL, {
-        usuario: usuario,
-        contrasenya: contrasenya,
-      }, {
-        headers: {
-          "Content-Type": "application/json",
+      const response = await axios.post(
+        USER_LOGIN_URL,
+        {
+          usuario: usuario,
+          contrasenya: contrasenya,
         },
-      });
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       console.log(response);
-      if (response.data.code === 0){
+
+      const usuarioResponse = response.data.resultado;
+
+      if (usuarioResponse.admin === "0") {
+        //REDIRECCIONAR AL MAIN NORMAL
+
+        console.log("USUARIO COMUN");
+      } else if (usuarioResponse.admin === "1") {
+        //REDIRECCIONAR AL MAIN ADMIN
+        console.log("USUARIO ADMINISTRADOR");
+      }
+
+      if (response.data.code === 0) {
         setCompletado("Inicio de sesion correcto.");
-      }else {
+      } else {
         setError("Credenciales incorrectas.");
       }
       hideAlerts();
+
+      
     } catch (error) {
       setError(
         "No se pudo registrar el usuario. Por favor, inténtelo de nuevo."
       );
+      hideAlerts();
     }
   };
 
