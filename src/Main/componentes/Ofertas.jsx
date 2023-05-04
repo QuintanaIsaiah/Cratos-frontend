@@ -4,6 +4,23 @@ import { useState } from "react";
 import { useEffect } from "react";
 const Ofertas = () => {
 
+
+    const [productos2, setProductos2] = useState({
+        usuario : ""
+    });
+
+
+    useEffect(() => {
+        axios.get("http://localhost/Cratos-backend/Usuario.php")
+          .then(resultado => {
+            setProductos2({ usuario: resultado.data});
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }, []);
+
+
     const [productos,setProductos] = useState({
         lista: []
     });
@@ -27,10 +44,15 @@ const Ofertas = () => {
         getProductos();
     }
 
+
     //Creamos función para añadir productos recibiendo su id por parametro (onclick={()=>añadir(lista[0])})
     function añadirProducto(id){
 
-        axios.post("http://localhost/Cratos-backend/a%C3%B1adirAcarro.php",id)
+        var valores = [];
+        valores[0] = id;
+        valores[1] = productos2.usuario;
+
+        axios.post("http://localhost/Cratos-backend/AnyadirAcarro.php",valores)
             .then(function (resultado){
                 console.log(resultado.data);
 
