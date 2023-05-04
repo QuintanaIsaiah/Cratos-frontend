@@ -3,6 +3,7 @@ import { Form, Button } from "rsuite";
 import axios from "axios";
 import { USER_LOGIN_URL } from "../shared/routes.js";
 import { Alert } from "reactstrap";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [usuario, setUsuario] = useState("");
@@ -10,8 +11,7 @@ const Login = () => {
 
   const [completado, setCompletado] = useState("");
   const [error, setError] = useState("");
-
-  
+  const history = useNavigate();
 
   const hideAlerts = () => {
     setTimeout(() => {
@@ -22,26 +22,47 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     try {
-      const response = await axios.post(USER_LOGIN_URL, {
-        usuario: usuario,
-        contrasenya: contrasenya,
-      }, {
-        headers: {
-          "Content-Type": "application/json",
+      const response = await axios.post(
+        USER_LOGIN_URL,
+        {
+          usuario: usuario,
+          contrasenya: contrasenya,
         },
-      });
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       console.log(response);
-      if (response.data.code === 0){
+
+      const usuarioResponse = response.data.resultado;
+
+      if (usuarioResponse.admin === "0") {
+        //REDIRECCIONAR AL MAIN NORMAL
+        history("/");
+
+        console.log("USUARIO COMUN");
+      } else if (usuarioResponse.admin === "1") {
+        //REDIRECCIONAR AL MAIN ADMIN
+        console.log("USUARIO ADMINISTRADOR");
+        history("/MainAdmin");
+      }
+
+      if (response.data.code === 0) {
         setCompletado("Inicio de sesion correcto.");
-      }else {
+      } else {
         setError("Credenciales incorrectas.");
       }
       hideAlerts();
+
+      
     } catch (error) {
       setError(
-        "No se pudo registrar el usuario. Por favor, inténtelo de nuevo."
+        "No se pudo iniciar sesión. Por favor, inténtelo de nuevo."
       );
+      hideAlerts();
     }
   };
 
