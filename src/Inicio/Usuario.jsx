@@ -20,24 +20,11 @@ const Usuario = () => {
           .catch(error => {
             console.log(error);
           });
+
       }, []);
 
-      useEffect(() => {
-
-        var valor = [];
-        valor[0] = productos.usuario;
-
-        axios.get("http://localhost/Cratos-backend/Mostrar_Carro.php",valor)
-          .then(resultado => {
-            console.log(productos.usuario)
-          })
-          .catch(error => {
-            console.log(error);
-          });
-      }, [productos.usuario]);
-
     return(
-        <div>{"Usuario : "+productos.usuario}</div>
+        <div>{productos.usuario}</div>
     );
 };
 

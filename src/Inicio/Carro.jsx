@@ -3,22 +3,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const Carro = () => {
-
-
-  const [productos2, setProductos2] = useState({
-    usuario : ""
-  });
-
-
-  useEffect(() => {
-      axios.get("http://localhost/Cratos-backend/Usuario.php")
-        .then(resultado => {
-          setProductos2({ usuario: resultado.data});
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    }, []);
     
 
   const [productos, setProductos] = useState({
@@ -48,12 +32,8 @@ const Carro = () => {
 
   //Creamos una función para eliminar un producto del carro, y que se actualiza
   function eliminarProducto(id){
-    
-    var valores = [];
-        valores[0] = id;
-        valores[1] = productos2.usuario;
 
-    axios.post("http://localhost/Cratos-backend/EliminarProductoCarro.php",valores)
+    axios.post("http://localhost/Cratos-backend/EliminarProductoCarro.php",id)
       .then(function (resultado) {
 
         if(resultado.data === 1){
