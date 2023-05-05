@@ -23,6 +23,19 @@ const Usuario = () => {
 
       }, []);
 
+      if(productos.usuario){
+        console.log(productos.usuario);
+        
+        let valor = { usuario: productos.usuario };
+        axios.post("http://localhost/Cratos-backend/Usuario_Mostrar.php", valor)
+          .then(resultado2 => {
+            console.log(resultado2.data);
+          });
+
+      }
+      else{
+      }
+
     return(
         <div>{productos.usuario}</div>
     );
