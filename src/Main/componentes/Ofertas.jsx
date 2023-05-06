@@ -4,6 +4,37 @@ import { useState } from "react";
 import { useEffect } from "react";
 const Ofertas = () => {
 
+    const [usuarios, setUsuarios] = useState({
+        usuario : ""
+    });
+
+    const [idUsuarios, setidUsuarios] = useState({
+        id_usuario :""
+    });
+
+
+    useEffect(() => {
+        axios.get("http://localhost/Cratos-backend/Usuario.php")
+          .then(resultado => {
+            setUsuarios({ usuario: resultado.data});
+            console.log("Nombre user "+resultado.data);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+
+      }, []);
+
+    
+      useEffect(() => {
+        let valor = { usuario: usuarios.usuario };
+        axios.post("http://localhost/Cratos-backend/Usuario_Mostrar.php", valor)
+            .then(resultado2 => {
+            console.log("IDE DEL USUARIO : "+resultado2.data);
+            setidUsuarios({id_usuario : resultado2.data});
+            });
+      }, [usuarios.usuario]);
+
 
     const [productos,setProductos] = useState({
         lista: []
@@ -32,7 +63,47 @@ const Ofertas = () => {
     //Creamos función para añadir productos recibiendo su id por parametro (onclick={()=>añadir(lista[0])})
     function añadirProducto(id){
 
-        axios.post("http://localhost/Cratos-backend/A%c3%b1adirACarro.php",id)
+        if(idUsuarios.id_usuario){
+            //console.log("idUsuario contiene"+idUsuarios.id_usuario);
+
+            let valor = [];
+            valor[0] = { idUsuario : idUsuarios.id_usuario};
+            valor[1] = id;
+            axios.post("http://localhost/Cratos-backend/AnyadirAcarro.php", valor)
+            .then(resultado2 => {
+                console.log(resultado2.data);
+
+                if(resultado2.data === 1){
+                    alert("Producto añadido al carro");
+                    }
+                    else{
+                        alert("No se ha podido añadir el producto al carro");
+                    }
+
+            });
+        }
+        else{
+            alert("No se puede añadir al carro , no tiene user");
+        }
+/*
+        let valor = [];
+        valor[0] = { usuario: usuarios.usuario };
+        valor[1] = id;
+        axios.post("http://localhost/Cratos-backend/AnyadirAcarro.php", valor)
+          .then(resultado2 => {
+            console.log(resultado2.data);
+
+            if(resultado2.data === 1){
+                alert("Producto añadido al carro");
+                }
+                else{
+                    alert("No se ha podido añadir el producto al carro");
+                }
+
+          });*/
+          
+        
+       /* axios.post("http://localhost/Cratos-backend/A%c3%b1adirACarro.php",id)
             .then(function (resultado){
                 console.log(resultado.data);
 
@@ -42,7 +113,7 @@ const Ofertas = () => {
                 else{
                     alert("No se ha podido añadir el producto al carro");
                 }
-            })
+            })*/
     }
 
     //Creamos constante donde almacene la imagenes en una variable 

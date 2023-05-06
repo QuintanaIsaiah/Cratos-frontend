@@ -40,9 +40,15 @@ const Login = () => {
       const usuarioResponse = response.data.resultado;
 
       if (usuarioResponse.admin === "0") {
+        /*PRUEBA SESION*/
+        let valor = { usuario: usuario};
+        axios.post("http://localhost/Cratos-backend/Usuario.php", valor)
+          .then(resultado => {
+            console.log("EL RESULTADO ES : "+resultado.data);
+          });
+
         //REDIRECCIONAR AL MAIN NORMAL
         history("/");
-
         console.log("USUARIO COMUN");
       } else if (usuarioResponse.admin === "1") {
         //REDIRECCIONAR AL MAIN ADMIN

@@ -1,9 +1,42 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Carro = () => {
-    
+   
+  const history = useNavigate();
+
+  const [usuarios, setUsuarios] = useState({
+    usuario : ""
+});
+
+const [idUsuarios, setidUsuarios] = useState({
+    id_usuario :""
+});
+
+
+useEffect(() => {
+    axios.get("http://localhost/Cratos-backend/Usuario.php")
+      .then(resultado => {
+        setUsuarios({ usuario: resultado.data});
+        console.log("Nombre user "+resultado.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+  }, []);
+
+
+  useEffect(() => {
+    let valor = { usuario: usuarios.usuario };
+    axios.post("http://localhost/Cratos-backend/Usuario_Mostrar.php", valor)
+        .then(resultado2 => {
+        console.log("IDE DEL USUARIO : "+resultado2.data);
+        setidUsuarios({id_usuario : resultado2.data});
+        });
+  }, [usuarios.usuario]);
 
   const [productos, setProductos] = useState({
     lista: [],
@@ -12,17 +45,21 @@ const Carro = () => {
   //Indicamos que ejecute getProductos una vez
   useEffect(() => {
     getProductos();
-  }, []);
+  }, [idUsuarios.id_usuario]);
 
   //Creamos una funcion para recoger la info desde el php y lo guardamos en lista []
   function getProductos() {
 
-
-    axios.get("http://localhost/Cratos-backend/mostrar_carro.php")
+    if(idUsuarios.id_usuario){
+      axios.post("http://localhost/Cratos-backend/mostrar_carro.php",{carro : idUsuarios.id_usuario})
       .then(function (resultado) {
-        //console.log(resultado);
+        //console.log(resultado.data);
         setProductos({ lista: resultado.data });
       });
+    }
+    else{
+      
+    }
   }
 
   //Creamos una funcion para que actualizar los datos , llamando de nuevo a getProductos
@@ -33,12 +70,36 @@ const Carro = () => {
   //Creamos una función para eliminar un producto del carro, y que se actualiza
   function eliminarProducto(id){
 
-    axios.post("http://localhost/Cratos-backend/EliminarProductoCarro.php",id)
+    let valor = [];
+    valor[0] = id;
+    valor[1] = idUsuarios.id_usuario;
+
+    axios.post("http://localhost/Cratos-backend/EliminarProductoCarro.php",valor)
       .then(function (resultado) {
 
+        console.log(resultado.data);
         if(resultado.data === 1){
           alert ("producto eliminado correctamente");
           actualizarProductos();
+        }
+        else{
+          alert("No se ha podido eliminar el producto");
+        }
+      });
+  }
+
+  //Creamos fncion para que cuando cinfirme compra, se borren los productos del user_carro
+  function confirmarCompra(){
+    let valor = { idUsuario: idUsuarios.id_usuario };
+    axios.post("http://localhost/Cratos-backend/ElimiinarCarro.php",valor)
+      .then(function (resultado) {
+
+        console.log(resultado.data);
+        if(resultado.data === 1){
+          alert ("Compra realizada correctamente");
+          actualizarProductos();
+          //Mande a la home
+          history("/");
         }
         else{
           alert("No se ha podido eliminar el producto");
@@ -88,7 +149,7 @@ const Carro = () => {
             </div>
             
             <div className="tramitar">
-              <input type="button" name="comprar" value="COMPRAR"></input>
+              <input type="button" name="comprar" value="COMPRAR" onClick={confirmarCompra}></input>
             </div>
             
           </div>
