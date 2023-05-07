@@ -1,45 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useState } from "react";
-import { useEffect } from "react";
-
 
 const Usuario = () => {
+  const [nombreUsuario, setNombreUsuario] = useState("");
 
-    const [productos, setProductos] = useState({
-        usuario : ""
-    });
+  useEffect(() => {
+    const usuarioAlmacenado = localStorage.getItem("usuario");
+    if (usuarioAlmacenado) {
+      setNombreUsuario(usuarioAlmacenado);
 
+      axios
+        .post("http://localhost/Cratos-backend/Usuario_Mostrar.php", {
+          usuario: usuarioAlmacenado
+        })
+        .then((response) => {
+          console.log("IDE DEL USUARIO: " + response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, []);
 
-    useEffect(() => {
-        axios.get("http://localhost/Cratos-backend/Usuario.php")
-          .then(resultado => {
-            setProductos({ usuario: resultado.data});
-            console.log("EL NOMBRE ES : "+resultado.data);
-          })
-          .catch(error => {
-            console.log(error);
-          });
-
-      }, []);
-
-      if(productos.usuario){
-        console.log("SI EL USER : "+productos.usuario);
-        
-        let valor = { usuario: productos.usuario };
-        axios.post("http://localhost/Cratos-backend/Usuario_Mostrar.php", valor)
-          .then(resultado2 => {
-            console.log("SI QUE HAY NOMBRE "+resultado2.data);
-          });
-
-      }
-      else{
-        console.log("NO HAY NADA EN NOMBRE");        
-      }
-
-    return(
-        <div>{productos.usuario}</div>
-    );
+  return <div>{nombreUsuario}</div>;
 };
 
 export default Usuario;

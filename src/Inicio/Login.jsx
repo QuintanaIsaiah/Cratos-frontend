@@ -45,10 +45,14 @@ const Login = () => {
         axios.post("http://localhost/Cratos-backend/Usuario.php", valor)
           .then(resultado => {
             console.log("EL RESULTADO ES : "+resultado.data);
+            // Almacenar el nombre de usuario en el almacenamiento local
+            localStorage.setItem("usuario", resultado.data);
+            // Recargar la página para ver los cambios aplicados
+            //window.location.reload();
           });
-
         //REDIRECCIONAR AL MAIN NORMAL
         history("/");
+        window.location.reload();
         console.log("USUARIO COMUN");
       } else if (usuarioResponse.admin === "1") {
         //REDIRECCIONAR AL MAIN ADMIN

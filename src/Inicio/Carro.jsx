@@ -7,36 +7,32 @@ const Carro = () => {
    
   const history = useNavigate();
 
-  const [usuarios, setUsuarios] = useState({
-    usuario : ""
-});
+  const [nombreUsuario, setNombreUsuario] = useState("");
 
-const [idUsuarios, setidUsuarios] = useState({
-    id_usuario :""
-});
-
-
-useEffect(() => {
-    axios.get("http://localhost/Cratos-backend/Usuario.php")
-      .then(resultado => {
-        setUsuarios({ usuario: resultado.data});
-        console.log("Nombre user "+resultado.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-
-  }, []);
-
-
-  useEffect(() => {
-    let valor = { usuario: usuarios.usuario };
-    axios.post("http://localhost/Cratos-backend/Usuario_Mostrar.php", valor)
-        .then(resultado2 => {
-        console.log("IDE DEL USUARIO : "+resultado2.data);
-        setidUsuarios({id_usuario : resultado2.data});
-        });
-  }, [usuarios.usuario]);
+    const [idUser, setidUser] = useState("");
+  
+    useEffect(() => {
+      const usuarioAlmacenado = localStorage.getItem("usuario");
+      if (usuarioAlmacenado) {
+        setNombreUsuario(usuarioAlmacenado);
+      }
+    }, []);
+  
+    useEffect(() => {
+      if (nombreUsuario) {
+        axios
+          .post("http://localhost/Cratos-backend/Usuario_Mostrar.php", {
+            usuario: nombreUsuario
+          })
+          .then((response) => {
+            console.log("IDE DEL USUARIO: " + response.data);
+            setidUser(response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    }, [nombreUsuario]);
 
   const [productos, setProductos] = useState({
     lista: [],
@@ -45,13 +41,13 @@ useEffect(() => {
   //Indicamos que ejecute getProductos una vez
   useEffect(() => {
     getProductos();
-  }, [idUsuarios.id_usuario]);
+  }, [idUser]);
 
   //Creamos una funcion para recoger la info desde el php y lo guardamos en lista []
   function getProductos() {
 
-    if(idUsuarios.id_usuario){
-      axios.post("http://localhost/Cratos-backend/mostrar_carro.php",{carro : idUsuarios.id_usuario})
+    if(idUser){
+      axios.post("http://localhost/Cratos-backend/mostrar_carro.php",idUser)
       .then(function (resultado) {
         //console.log(resultado.data);
         setProductos({ lista: resultado.data });
@@ -72,7 +68,7 @@ useEffect(() => {
 
     let valor = [];
     valor[0] = id;
-    valor[1] = idUsuarios.id_usuario;
+    valor[1] = idUser;
 
     axios.post("http://localhost/Cratos-backend/EliminarProductoCarro.php",valor)
       .then(function (resultado) {
@@ -90,7 +86,7 @@ useEffect(() => {
 
   //Creamos fncion para que cuando cinfirme compra, se borren los productos del user_carro
   function confirmarCompra(){
-    let valor = { idUsuario: idUsuarios.id_usuario };
+    let valor = idUser;
     axios.post("http://localhost/Cratos-backend/ElimiinarCarro.php",valor)
       .then(function (resultado) {
 

@@ -5,36 +5,32 @@ import { useEffect } from "react";
 
 const Productos = () => {
 
-  const [usuarios, setUsuarios] = useState({
-    usuario : ""
-});
+  const [nombreUsuario, setNombreUsuario] = useState("");
 
-const [idUsuarios, setidUsuarios] = useState({
-    id_usuario :""
-});
-
-
-useEffect(() => {
-    axios.get("http://localhost/Cratos-backend/Usuario.php")
-      .then(resultado => {
-        setUsuarios({ usuario: resultado.data});
-        console.log("Nombre user "+resultado.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-
-  }, []);
-
-
-  useEffect(() => {
-    let valor = { usuario: usuarios.usuario };
-    axios.post("http://localhost/Cratos-backend/Usuario_Mostrar.php", valor)
-        .then(resultado2 => {
-        console.log("IDE DEL USUARIO : "+resultado2.data);
-        setidUsuarios({id_usuario : resultado2.data});
-        });
-  }, [usuarios.usuario]);
+    const [idUser, setidUser] = useState("");
+  
+    useEffect(() => {
+      const usuarioAlmacenado = localStorage.getItem("usuario");
+      if (usuarioAlmacenado) {
+        setNombreUsuario(usuarioAlmacenado);
+      }
+    }, []);
+  
+    useEffect(() => {
+      if (nombreUsuario) {
+        axios
+          .post("http://localhost/Cratos-backend/Usuario_Mostrar.php", {
+            usuario: nombreUsuario
+          })
+          .then((response) => {
+            console.log("IDE DEL USUARIO: " + response.data);
+            setidUser(response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    }, [nombreUsuario]);
 
   const [productos, setProductos] = useState({
     lista: [],
@@ -63,12 +59,12 @@ useEffect(() => {
   //Creamos función para añadir productos recibiendo su id por parametro (onclick={()=>añadir(lista[0])})
   function añadirProducto(id) {
 
-    if(idUsuarios.id_usuario){
+    if(nombreUsuario){
       //console.log("idUsuario contiene"+idUsuarios.id_usuario);
 
       let valor = [];
-      valor[0] = { idUsuario : idUsuarios.id_usuario};
-      valor[1] = id;
+        valor[0] = idUser;
+        valor[1] = id;
       axios.post("http://localhost/Cratos-backend/AnyadirAcarro.php", valor)
       .then(resultado2 => {
           console.log(resultado2.data);

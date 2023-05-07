@@ -2,120 +2,77 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
+
+
 const Ofertas = () => {
+    const [nombreUsuario, setNombreUsuario] = useState("");
 
-    const [usuarios, setUsuarios] = useState({
-        usuario : ""
-    });
-
-    const [idUsuarios, setidUsuarios] = useState({
-        id_usuario :""
-    });
-
-
+    const [idUser, setidUser] = useState("");
+  
     useEffect(() => {
-        axios.get("http://localhost/Cratos-backend/Usuario.php")
-          .then(resultado => {
-            setUsuarios({ usuario: resultado.data});
-            console.log("Nombre user "+resultado.data);
+      const usuarioAlmacenado = localStorage.getItem("usuario");
+      if (usuarioAlmacenado) {
+        setNombreUsuario(usuarioAlmacenado);
+      }
+    }, []);
+  
+    useEffect(() => {
+      if (nombreUsuario) {
+        axios
+          .post("http://localhost/Cratos-backend/Usuario_Mostrar.php", {
+            usuario: nombreUsuario
           })
-          .catch(error => {
+          .then((response) => {
+            console.log("IDE DEL USUARIO: " + response.data);
+            setidUser(response.data);
+          })
+          .catch((error) => {
             console.log(error);
           });
-
-      }, []);
-
-    
-      useEffect(() => {
-        let valor = { usuario: usuarios.usuario };
-        axios.post("http://localhost/Cratos-backend/Usuario_Mostrar.php", valor)
-            .then(resultado2 => {
-            console.log("IDE DEL USUARIO : "+resultado2.data);
-            setidUsuarios({id_usuario : resultado2.data});
-            });
-      }, [usuarios.usuario]);
-
-
-    const [productos,setProductos] = useState({
-        lista: []
+      }
+    }, [nombreUsuario]);
+  
+    const [productos, setProductos] = useState({
+      lista: []
     });
-
-    //Indicamos que ejecute getProductos una vez
-    useEffect(() =>{
-        getProductos();
-    },[]);
-
-    //Creamos una funcion para recoger la info desde el php y lo guardamos en lista []
-    function getProductos(){
-        axios.get('http://localhost/Cratos-backend/Ofertas.php')
-            .then(function(resultado){
-                console.log(resultado);
-                setProductos({lista:resultado.data});
-            })
+  
+    useEffect(() => {
+      getProductos();
+    }, []);
+  
+    function getProductos() {
+      axios
+        .get("http://localhost/Cratos-backend/Ofertas.php")
+        .then((resultado) => {
+          console.log(resultado);
+          setProductos({ lista: resultado.data });
+        });
     }
-
-    //Creamos una funcion para que actualizar los datos , llamando de nuevo a getProductos
-    function actualizarProductos(){
-        getProductos();
+  
+    function actualizarProductos() {
+      getProductos();
     }
-
-
-    //Creamos función para añadir productos recibiendo su id por parametro (onclick={()=>añadir(lista[0])})
-    function añadirProducto(id){
-
-        if(idUsuarios.id_usuario){
-            //console.log("idUsuario contiene"+idUsuarios.id_usuario);
-
-            let valor = [];
-            valor[0] = { idUsuario : idUsuarios.id_usuario};
-            valor[1] = id;
-            axios.post("http://localhost/Cratos-backend/AnyadirAcarro.php", valor)
-            .then(resultado2 => {
-                console.log(resultado2.data);
-
-                if(resultado2.data === 1){
-                    alert("Producto añadido al carro");
-                    }
-                    else{
-                        alert("No se ha podido añadir el producto al carro");
-                    }
-
-            });
-        }
-        else{
-            alert("No se puede añadir al carro , no tiene user");
-        }
-/*
+  
+    function añadirProducto(id) {
+      if (nombreUsuario) {
         let valor = [];
-        valor[0] = { usuario: usuarios.usuario };
+        valor[0] = idUser;
         valor[1] = id;
-        axios.post("http://localhost/Cratos-backend/AnyadirAcarro.php", valor)
-          .then(resultado2 => {
-            console.log(resultado2.data);
-
-            if(resultado2.data === 1){
-                alert("Producto añadido al carro");
-                }
-                else{
-                    alert("No se ha podido añadir el producto al carro");
-                }
-
-          });*/
-          
-        
-       /* axios.post("http://localhost/Cratos-backend/A%c3%b1adirACarro.php",id)
-            .then(function (resultado){
-                console.log(resultado.data);
-
-                if(resultado.data === 1){
-                    alert("Producto añadido al carro");
-                }
-                else{
-                    alert("No se ha podido añadir el producto al carro");
-                }
-            })*/
+        axios
+          .post("http://localhost/Cratos-backend/AnyadirAcarro.php", valor)
+          .then((resultado2) => {
+            console.log("El añadir carro devuelbe : "+resultado2.data);
+  
+            if (resultado2.data === 1) {
+              alert("Producto añadido al carro");
+            } else {
+              alert("No se ha podido añadir el producto al carro");
+            }
+          });
+      } else {
+        alert("No se puede añadir al carro, no tiene usuario");
+      }
     }
-
     //Creamos constante donde almacene la imagenes en una variable 
     const productosImg = require.context("../img",true);
     
