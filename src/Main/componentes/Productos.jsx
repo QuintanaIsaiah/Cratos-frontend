@@ -2,6 +2,10 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
+import { Link} from "react-router-dom";
+
+
+
 
 const Productos = () => {
 
@@ -51,6 +55,9 @@ const Productos = () => {
       });
   }
 
+
+
+
   //Creamos una funcion para que actualizar los datos , llamando de nuevo a getProductos
   function actualizarProductos() {
     getProductos();
@@ -98,6 +105,8 @@ const Productos = () => {
   //Creamos constante donde almacene la imagenes en una variable 
   const productosImg = require.context("../img",true);
 
+  
+
 
   return (
     <div>
@@ -134,7 +143,9 @@ const Productos = () => {
                 ></input>
               </li>
               <li>
-                <input type="button" id="ver" name="ver" value="VER"></input>
+                 <Link to={`/Detalle/${listado[0]}`} className="ver-btn">
+                  <button type="button" id="ver" name="ver">VER</button>
+                </Link>
               </li>
             </ul>
           </div>
