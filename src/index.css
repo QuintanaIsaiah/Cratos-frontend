@@ -13,9 +13,35 @@ code {
     monospace;
 }
 
+/* NavBar */
+
 .NavBarContainer {
-  border: solid 1px red;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 10px;
+  background-color: #c0bfbf27;
+}
+
+.logo img{
+  width: 170px; /* cambiar el valor de acuerdo al tamaño deseado */
+  height: auto;
+  margin-left: 60px;
+}
+
+.navLinksContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 40px;
+}
+
+.navLinksContainer a {
+  text-decoration: none !important;
+  color: inherit !important;
+  padding: 10px;
+  margin: 0 5px;
+  border: none;
 }
 
   /* Carro */
@@ -248,9 +274,9 @@ code {
       display: inline-block;
       margin:10px;
   }
-      .p_titulo{
+      /*.p_titulo{
         
-      }
+      }*/
       .p_img{     
         background-color: grey;
         width: 80%;
