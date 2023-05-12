@@ -1,12 +1,15 @@
 import axios from "axios";
 import { CONNECTION_URL } from "../shared/routes.js";
 import React from "react";
+import Banner from "./componentes/Banner";
 import Productos from "./componentes/Productos";
 import Categoria1 from "./componentes/Categoria1";
 import Categoria2 from "./componentes/Categoria2";
 import Categoria3 from "./componentes/Categoria3";
 import Ofertas from "./componentes/Ofertas";
 import { useEffect, useState } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const Main = () => {
 
@@ -61,7 +64,7 @@ const Main = () => {
 
         return (
             <div>
-                <div className="m-banner">Banner</div>
+                <div className="m-banner"><Banner /></div>
                 <div className="m-ofertas"><Ofertas/></div>
                 <div className="m-categorias">
                     <div onClick={seleccionarTodos}><h3>Todos los productos</h3></div>

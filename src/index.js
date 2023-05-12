@@ -7,9 +7,11 @@ import Login from "./Inicio/Login";
 import Register from "./Inicio/Register";
 import Carro from "./Inicio/Carro";
 
+
 import Usuario from "./Inicio/Usuario";
 
 import MainAdmin from "./MainAdmin";
+
 
 // import Inicio from "./Inicio";
 // import Main from "./Main";
@@ -35,6 +37,7 @@ root.render(
       <Route path="/Main" element={<Main />}></Route>
       <Route path="/MainAdmin" element={<MainAdmin />}></Route> */}
     </Routes>
+    
     {/* <Footer /> */}
   </BrowserRouter>
   //commit de prueba
