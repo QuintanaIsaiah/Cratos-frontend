@@ -45,33 +45,40 @@ code {
 }
 
   /* Carro */
-  
+  .cont h2{
+    margin-left: 20px;
+  }
   .c-caja{
-    background-color: antiquewhite;
     width: 65%;
     display: inline-block;
+    margin-left: 20px;
   }
   .c-conetendor_2{
-    background-color: grey;
+    background-color: #697984;
+    margin-top: 10px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    text-align: center;
   }
   .c-conetendor_2 div{
     display: inline-flex;
-    background-color: red;
-    width: 100%;      
+    width: 95%;      
     height: 50px;
     align-items: center;
   }
     .c-conetendor{
-      background-color: grey;
-      padding-top:20px;
+      text-align: center;
+      background-color: #697984;
     }
       .c-conetendor div{
         display: inline-flex;
-   
-        width: 100%;      
+        background-color: white;
+        width: 95%;
         height: 50px;
         align-items: center;
         text-align: center;
+        margin-bottom: 10px;
+        border-radius: 12px;
       }
         .c-lista div{
           margin: 2%;
@@ -82,6 +89,9 @@ code {
         }
           .c_p{
             font-size: 60%;
+          }
+          .precio-f{
+            font-weight: 600;
           }
         
 
@@ -120,27 +130,59 @@ code {
 
 /* Caja2 */
 .c-caja2{
-  width: 35%;
+  width: 30%;
   display: inline-block;
   position: absolute;
+  margin-top: 10px;
+  margin-left: 30px;
+  border-radius: 12px;
+  background-color: #697984;
 }
   .c-caja2-1{
-    border: 1px solid black;
   }
     .c-caja2-div{
-      margin-left: 30px;
+      margin-left: 20px;
       font-size: 20px;
       margin-bottom: 20px;
       margin-top: 10px;
+      margin-right: 20px;
+      background-color: white;
+      padding: 10px;
+      border-radius: 12px;
     }
+      .c-caja2-1 h3{
+        margin-left: 20px;
+        padding-top: 5px;
+      }
       .tramitar{
         text-align: center;
         margin: 2%;
         font-size: 18px;
+        margin-bottom: 0px;
       }
+      #comprar{
+        padding: 8px;
+        border-radius: 10px;
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #ECF0F1;
+      }
+        #comprar:hover{
+          background-color: #B3B6B7;
+          color: black;
+        }
+        .precio-final{
+          font-size: 22px;
+          font-weight: 600;
+        }
 
   .c-caja2-2{
-    border: 1px solid black;
+      margin-left: 20px;
+      font-size: 20px;
+      margin-bottom: 20px;
+      margin-right: 20px;
+      background-color: white;
+      padding: 10px;
+      border-radius: 12px;
   }
   .c-caja2-2-div{
     display: inline-block;
@@ -298,7 +340,7 @@ code {
 }
 
   .t-l-productos{
-    background-color:#BCAAA4;
+    background-color:#697984;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
   }
@@ -307,7 +349,7 @@ code {
     font-size: 28px;
   }
     .t-l-cat1{
-      background-color:#BCAAA4;
+      background-color:#697984;
       border-top-left-radius: 5px;
       border-top-right-radius: 5px;
     }
@@ -316,7 +358,7 @@ code {
       font-size: 28px;
     }
     .t-l-cat2{
-      background-color:#BCAAA4;
+      background-color:#697984;
       border-top-left-radius: 5px;
       border-top-right-radius: 5px;
     }
@@ -325,7 +367,7 @@ code {
       font-size: 28px;
     }
     .t-l-cat3{
-      background-color:#BCAAA4;
+      background-color:#697984;
       border-top-left-radius: 5px;
       border-top-right-radius: 5px;
     }
@@ -363,7 +405,7 @@ code {
           width: 300px;
         }
       .p_descripcion{
-        background-color: #BCAAA4;
+        background-color: #697984;
         border-radius: 12px;
         width: 96%;
         height: 100px;
@@ -387,3 +429,9 @@ code {
   border:1px solid green; 
 }
 
+@media (max-width: 480px) {
+  /* Estilos para pantallas de hasta 480px de ancho */
+  body{
+    background-color: red;
+  } 
+}

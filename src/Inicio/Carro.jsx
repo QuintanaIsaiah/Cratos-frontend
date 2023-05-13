@@ -119,7 +119,7 @@ const Carro = () => {
   } else {
     
     return (
-      <div>
+      <div className="cont">
         <h2 onClick={actualizarProductos}>Listado de Carro</h2>
 
         <div className="c-caja">
@@ -141,11 +141,11 @@ const Carro = () => {
             <h3>Resumen Pedido</h3>
             <div className="c-caja2-div">
               <div>Total productos : {productos.lista.length} unidades</div>
-              <div>Precio Final: {productos.lista.reduce((acumulado, listado) => acumulado + parseFloat(listado[4]-(listado[4]*listado[5]/100)), 0)} €</div>
+              <div className="precio-final">Precio Final: {productos.lista.reduce((acumulado, listado) => acumulado + parseFloat(listado[4]-(listado[4]*listado[5]/100)), 0)} €</div>
             </div>
             
             <div className="tramitar">
-              <input type="button" name="comprar" value="COMPRAR" onClick={confirmarCompra}></input>
+              <input type="button" id="comprar" name="comprar" value="COMPRAR" onClick={confirmarCompra}></input>
             </div>
             
           </div>
@@ -181,7 +181,7 @@ const Carro = () => {
                     {/*<div>{listado[3]}</div>*/}
                     <div>{listado[4]+"€"}</div>
                     <div>{listado[5]+"%"}</div>
-                    <div>{(listado[4]-(listado[4]*listado[5]/100))+"€"}</div>
+                    <div className="precio-f">{(listado[4]-(listado[4]*listado[5]/100))+"€"}</div>
                     <div><input type="button" name="eliminar" value="ELIMINAR" onClick={() => eliminarProducto(listado[0])}></input></div>
                   </div>
                 </div>
