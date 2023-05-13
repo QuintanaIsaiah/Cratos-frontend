@@ -45,7 +45,7 @@ const Categoria1 = () => {
       }
     
       return (
-        <div>
+        <div className="t-l-cat3">
           <h2 onClick={actualizarProductos}>Categoria 3</h2>
     
           <div className="contenedor_producto">

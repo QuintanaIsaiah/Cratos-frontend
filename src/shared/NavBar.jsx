@@ -6,6 +6,11 @@ import logo_cratos from '../Main/img/logo_cratos.svg';
 
 const NavBar = () => {
 
+  function cerrarSesion(){
+    alert("cierrosesion");
+    localStorage.setItem("usuario", "");
+    window.location.reload();
+  }
 
   return (
     <div className="NavBarContainer">
@@ -13,10 +18,13 @@ const NavBar = () => {
     <div className="navLinksContainer">
       <Link to={"/Login"} className="linkLogin">Log In</Link>
       <span>|</span>
+      <span className="linkCerrarSesion" onClick={cerrarSesion}>Log out</span>
+      <span>|</span>
       <Link to={"/Register"} className="linkLogin">Register</Link>
       <span>|</span>
       <Link to={"/Carro"} className="linkLogin">Carro</Link>
-      <Usuario></Usuario>
+      <span>|</span>
+      <span className="linkCerrarSesion">User<Usuario></Usuario></span>
     </div>
     </div>
   );

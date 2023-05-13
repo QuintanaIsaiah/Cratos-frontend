@@ -22,7 +22,7 @@ const Usuario = () => {
     }
   }, []);
 
-  return <div>{nombreUsuario}</div>;
+  return <div>{":  "+nombreUsuario}</div>;
 };
 
 export default Usuario;

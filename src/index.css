@@ -91,6 +91,12 @@ code {
     border:solid 1px;
     padding: 3px;
   }
+  .linkCerrarSesion{
+    display: inline-flex;
+    padding: 3px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 
 .footerContainer {
   background-color: #f2f2f2;
@@ -161,18 +167,15 @@ code {
 
 
 .m-ofertas{
-  border:1px solid grey;
+  
 }
 .contenedor_ofertas{
-  background-color: grey;
   display:inline-block;
   text-align: center;
   width: 100%;
 }
 
   .div_ofertas{
-    border: 1px solid black;
-    background-color:antiquewhite;
     height: 520px;
     width:50%;
     display:inline-flex;
@@ -180,12 +183,14 @@ code {
 }
 
   .o_cont1{
-    background-color: grey;
+    background-color: white;
     width: 52%;
     height: 520px;
     display:inline-block;
   }
   .o_cont2{
+    border-radius: 12px;
+    background-color: #697984;
     width: 48%;
     height: 100%;
     display: inline-block;
@@ -217,12 +222,12 @@ code {
       padding: 5px;
     }
     .o_porcentaje{
-      border: 0.5px solid black;
-      background-color: red;
+      background-color: #ff4040;
       width: 100%;
       border-radius: 20px;
       padding: 2px;
       font-size: 20px;
+      color: white;
     }
     .o_total{
       font-size: 22px;
@@ -239,14 +244,41 @@ code {
       .o_botones li{
         padding: 2px;
       }
-
+        #añadir{
+          border-radius: 10px;
+          font-family: Arial, Helvetica, sans-serif;
+          background-color: grey;
+        }
+          #añadir:hover{
+            color: #ffffff;
+          }
+      #añadir{
+          border-radius: 10px;
+          font-family: Arial, Helvetica, sans-serif;
+          background-color: #ECF0F1;
+        }
+          #añadir:hover{
+            background-color: #B3B6B7;
+            color: black;
+          }
+          #ver{
+            font-size: 14px;
+            border-radius: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color:#ECF0F1;
+          }
+            #ver:hover{
+              background-color: #B3B6B7;
+              color: black;
+            }  
 
   
 .m-categorias{
-  margin-top: 2%;
-  background-color: greenyellow;
+  margin-top: 5%;
+  margin-bottom: 1%;;
   display: inline-block;
   width: 100%;
+  border: 0px !important;
 }
   .m-categorias div{
     display: inline-flex;
@@ -263,21 +295,56 @@ code {
 
 
 .m-productos{
-  border:1px solid blue;
 }
 
+  .t-l-productos{
+    background-color:#BCAAA4;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+  .t-l-productos h2{
+    margin-left: 25px;
+    font-size: 28px;
+  }
+    .t-l-cat1{
+      background-color:#BCAAA4;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+    }
+    .t-l-cat1 h2{
+      margin-left: 25px;
+      font-size: 28px;
+    }
+    .t-l-cat2{
+      background-color:#BCAAA4;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+    }
+    .t-l-cat2 h2{
+      margin-left: 25px;
+      font-size: 28px;
+    }
+    .t-l-cat3{
+      background-color:#BCAAA4;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+    }
+    .t-l-cat3 h2{
+      margin-left: 25px;
+      font-size: 28px;
+    }
+    
   /* Todos los productos */
 
   .contenedor_producto{
-    background-color: grey;
     display:inline-block;
     padding-top: 50px;
     text-align: center;
   }
 
     .div_producto{
-      border: 1px solid black;
-      background-color:antiquewhite;
+      border-radius:10px;
+      background-color:white;
       height: 550px;
       width: 480px;
       display: inline-block;
@@ -287,7 +354,7 @@ code {
         
       }*/
       .p_img{     
-        background-color: grey;
+        background-color: white;
         width: 80%;
         margin-left:10%;
         height:300px;
@@ -296,7 +363,8 @@ code {
           width: 300px;
         }
       .p_descripcion{
-        background-color:darkgrey;
+        background-color: #BCAAA4;
+        border-radius: 12px;
         width: 96%;
         height: 100px;
         margin: 2%;
@@ -306,7 +374,7 @@ code {
       .p_precio{
         padding: 1%;
         margin: 2%;
-        font-size: 18px;
+        font-size: 20px;
       }
       .p_botones{
         text-align: left;

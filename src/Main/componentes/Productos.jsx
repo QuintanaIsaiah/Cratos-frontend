@@ -101,7 +101,7 @@ const Productos = () => {
 
 
   return (
-    <div>
+    <div className="t-l-productos">
       <h2 onClick={actualizarProductos}>Todos los productos</h2>
 
       <div className="contenedor_producto">
