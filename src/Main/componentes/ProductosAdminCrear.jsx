@@ -1,0 +1,103 @@
+import React from "react";
+import { useState} from "react";
+import axios from "axios";
+//import { functionsIn } from "lodash";
+import { useNavigate } from "react-router-dom";
+
+const ProductosAdminCrear = () => {
+
+    const history = useNavigate();
+
+    const [productos, setProductos] = useState({
+        nombre:"",
+        categoria:"",
+        descripcion:"",
+        precio:"",
+        porcentaje_oferta:"",
+        imagen:null
+      });
+
+    const handleNombreChange = (event) => {
+        setProductos({ ...productos, nombre: event.target.value });
+    };
+    const handleCategoriaChange = (event) => {
+        setProductos({ ...productos, categoria: event.target.value });
+    };
+    const handleDescripcionChange = (event) => {
+        setProductos({ ...productos, descripcion: event.target.value });
+    };
+    const handlePrecioChange = (event) => {
+        setProductos({ ...productos, precio: event.target.value });
+    };
+    const handleOfertaChange = (event) => {
+        setProductos({ ...productos, porcentaje_oferta: event.target.value });
+    };
+
+    const handleImagenChange = (event) => {
+        const file = event.target.files[0];
+        setProductos({ ...productos, imagen: file });
+      };
+
+    function crearProductos(){
+
+        alert(productos.imagen);
+
+        let valor = [];
+        valor[0] = productos.nombre;
+        valor[1] = productos.categoria;
+        valor[2] = productos.descripcion;
+        valor[3] = productos.precio;
+        valor[4] = productos.porcentaje_oferta;
+        valor[5] = productos.imagen;
+        
+        axios.post("http://localhost/Cratos-backend/ProductosAdminCrear.php", valor)
+            .then((resultado2) => {
+                console.log("LA PH DEVUELVE : "+resultado2.data);
+    
+                if (resultado2.data === 1) {
+                alert("Se ha creado el producto");
+                history("/ProductosAdmin");
+
+                } else {
+                alert("No se ha podido crear el producto");
+                }
+            });
+
+    }
+    return (
+        <div>
+            <h3>Crear un nuevo producto</h3>
+                <br></br>
+            <form>
+                <label>Nombre: </label>
+                    <input type="text" value={productos.nombre} onChange={handleNombreChange}></input>
+                        <br></br>
+                        <br></br>
+                <label>Categoria: </label>
+                    <input type="text" value={productos.categoria} onChange={handleCategoriaChange}></input>
+                        <br></br>
+                        <br></br>
+                <label>Descripcion: </label>
+                    <input type="text" value={productos.descripcion} onChange={handleDescripcionChange}></input>
+                        <br></br>
+                        <br></br>
+                <label>Precio: </label>
+                    <input type="number" value={productos.precio} onChange={handlePrecioChange}></input>
+                        <br></br>
+                        <br></br>
+                <label>Porcentaje Oferta: </label>
+                    <input type="number" value={productos.porcentaje_oferta} onChange={handleOfertaChange}></input>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                <label>Imagen: </label>
+                    <input type="file" onChange={handleImagenChange}></input>
+                        <br></br>
+                        <br></br>
+                <input type="button" value="CREAR" onClick={crearProductos}></input>
+            </form>
+        </div>
+    )
+}
+
+export default ProductosAdminCrear;

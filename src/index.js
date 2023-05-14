@@ -7,6 +7,8 @@ import Login from "./Inicio/Login";
 import Register from "./Inicio/Register";
 import Carro from "./Inicio/Carro";
 
+import ProductosAdmin from "./Main/componentes/ProductosAdmin";
+import ProductosAdminCrear from "./Main/componentes/ProductosAdminCrear";
 
 import Usuario from "./Inicio/Usuario";
 
@@ -31,6 +33,8 @@ root.render(
     <Route path="/Usuario" element={<Usuario/>}></Route>
     <Route path="/mainAdmin" element={<MainAdmin />}></Route>
 
+    <Route path="/ProductosAdmin" element={<ProductosAdmin/>}></Route>
+    <Route path="/ProductosAdminCrear" element={<ProductosAdminCrear/>}></Route>
       {/* <Route path="/" element={<Inicio />}></Route>
       <Route path="/Login" element={<Login />}></Route>
       <Route path="/Register" element={<Register />}></Route>

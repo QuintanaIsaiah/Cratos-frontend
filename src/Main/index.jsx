@@ -12,7 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const Main = () => {
-
+    
     // Llamo a connection.php para crear la db al cargar la web
     useEffect(() => {
         const crearDB = async () => {
