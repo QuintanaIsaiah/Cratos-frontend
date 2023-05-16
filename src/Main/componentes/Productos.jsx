@@ -135,7 +135,7 @@ const Productos = () => {
                 ></input>
               </li>
               <li>
-                <Link to={`/Detalle/${listado[0]}`} className="ver-btn">
+                <Link to={`/Detalle/producto/${listado[0]}`} className="ver-btn">
                   <button type="button" id="ver" name="ver">VER</button>
                   </Link>
               </li>

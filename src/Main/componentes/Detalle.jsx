@@ -1,49 +1,79 @@
-//import { useState } from "react";
-//import { useEffect } from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import React from 'react';
+import Banner from './Banner';
 import { useParams } from "react-router-dom";
-//import axios from "axios";
+import axios from "axios";
 
 
 
 const Detalle = () => {
 
-  /*const { id } = useParams();
-  const [producto, setProducto] = useState({}); // Estado para almacenar los datos del producto
+  const { id, tipo } = useParams();
+  console.log(id, tipo);
+  const [item, setItem] = useState({});
+  //const [producto, setProducto] = useState({}); // Estado para almacenar los datos del producto
+  //const [oferta, setOferta] = useState({});
 
   useEffect(() => {
-    // Función asíncrona para obtener los datos del producto y actualizar el estado
-    async function fetchProducto() {
-      const resultado = await axios.get(`http://localhost/Cratos-backend/productos.php?id=${id}`);
-      setProducto(resultado.data);
+    async function fetchData() {
+      try {
+        let consultaURL = '';
+
+        if (tipo === 'producto') {
+          console.log(id);
+          consultaURL = `http://localhost/Cratos-backend/Productos.php?id=${id}`;
+        } else if (tipo === 'oferta') {
+          consultaURL = `http://localhost/Cratos-backend/Ofertas.php?id=${id}`;
+        }
+
+        const response = await axios.post(
+          consultaURL,
+          {
+            id: id,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        
+        const itemData = response.data[0];
+        console.log(itemData);
+
+        setItem(itemData);
+
+      } catch (error) {
+        console.error('Error al obtener los datos del elemento:', error);
+      }
     }
-    fetchProducto();
-  }, [id]); // El hook se ejecuta cuando el valor de `id` cambia
+
+    fetchData();
+  }, [id, tipo]);// El hook se ejecuta cuando el valor de `id` cambia
+
+  
 
   return (
     <div className='container_detalle'>
-      {Object.keys(producto).length !== 0 ? ( // Si el objeto producto tiene propiedades, se muestra la información
+      <Banner />
+      {Object.keys(item).length !== 0 ? ( // Si el objeto producto tiene propiedades, se muestra la información
         <div>
           <div className='foto_detalle'>
-            <img src={require(`../img/${producto.nombre}.jpg`).default} alt={producto.nombre} />
+            <img src={(`../img/${item.nombre}.jpg`).default} alt={item.nombre} />
           </div>
           <div className='descripcion_detalle'>
-            <h2>{producto.nombre}</h2>
-            <p>{producto.descripcion}</p>
-            <p>Precio: {producto.precio} €</p>
+            <h2>{item.nombre}</h2>
+            <p>{item.descripcion}</p>
+            <p>Precio: {item.precio} €</p>
             <button>Añadir al carrito</button>
           </div>
         </div>
       ) : (
-        <p>Cargando producto...</p> // Mientras se espera a que se resuelva la promesa
+        <p>Cargando producto...</p> 
       )}
     </div>
   );
-};*/
-
-    const { id } = useParams();
-  //Aquí puede usar el valor de "id" para obtener la información del producto y mostrarla en la página de detalle.
-  return <h1>Detalle del producto {id}</h1>;
 };
 
 export default Detalle;

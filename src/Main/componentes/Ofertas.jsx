@@ -108,7 +108,7 @@ const Ofertas = () => {
                                     <ul className="o_botones">
                                         <li>cat: {listado[2]}</li>
                                         <li><input type="button" id="añadir" name="añadir" value="AÑADIR AL CARRO" onClick={()=> añadirProducto(listado[0])}></input></li>
-                                        <li><Link to={`/Detalle/${listado[0]}`} className="ver-btn"><button type="button" id="ver" name="ver">VER</button></Link></li>
+                                        <li><Link to={`/Detalle/oferta/${listado[0]}`} className="ver-btn"><button type="button" id="ver" name="ver">VER</button></Link></li>
                                     </ul>
                                 </div>
                                 

@@ -6,7 +6,7 @@ import NavBar from "./shared/NavBar";
 import Login from "./Inicio/Login";
 import Register from "./Inicio/Register";
 import Carro from "./Inicio/Carro";
-
+import Detalle from './Main/componentes/Detalle';
 import ProductosAdmin from "./Main/componentes/ProductosAdmin";
 import ProductosAdminCrear from "./Main/componentes/ProductosAdminCrear";
 
@@ -32,6 +32,7 @@ root.render(
     <Route path="/Carro" element={<Carro/>}></Route>
     <Route path="/Usuario" element={<Usuario/>}></Route>
     <Route path="/mainAdmin" element={<MainAdmin />}></Route>
+    <Route path="/Detalle/:tipo/:id" element={<Detalle />} />
 
     <Route path="/ProductosAdmin" element={<ProductosAdmin/>}></Route>
     <Route path="/ProductosAdminCrear" element={<ProductosAdminCrear/>}></Route>
