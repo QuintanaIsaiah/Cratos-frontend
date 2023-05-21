@@ -489,55 +489,98 @@ code {
   text-align: center;
 }
 
-.quienesSomos {
-  color: white;
-  text-decoration: none;
-  margin-right: 200px;
+/* Listado Productos Admin */
+.t-p-container{
+  padding: 2%;
 }
-
-/*Quienes Somos */
-
-.titulo-q h2 {
-  margin-top: 50px;
-  margin-bottom: 40px;
-  text-align: center;
-  font-size: 24px;
-  font-style: black;
-  align-items: flex-start;
+.t-p-div{
+  padding: 1.5%;
+  width: 80%;
+  border-radius: 10px;
+  background-color:#697984;
+  margin-bottom: 0px;
 }
+  .b-t-crear{
+    border-radius: 5px;
+    border: 1px solid black;
+    background-color:white;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    font-size: 18px;
+    padding: 5px;
+    margin-right: 15px;
+  }
+  .b-t-crear:hover{
+    border-radius: 5px;
+    border: 1px solid white;
+    background-color:#697984;
+    color: white;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    font-size: 18px;
+    padding: 5px;
+  }
+  .t-p-listado{
+    background-color: white;
+    text-align: right;
+    padding: 2%;
+    border-radius: 12px;
+  }
+    .t-p-tabla{
+      width: 100%;
+      background-color:#697984;
+      border-radius: 10px;
+    }
+      .t1-p-tr{
+        font-size: 20px;
+        text-align: center;
+        font-weight: 600;
+      }
+      .t2-p-tr{
+        font-size: 18px;
+        text-align: center;
+      }
+        .t2-p-tr td{
+          padding: 1%;
+          background-color: white;
+        }
+          .b-t-eliminar{
+            border-radius: 5px;
+            border: 1px solid black;
+            background-color:white;
+            margin-top: 10px;
+            font-size: 18px;
+          }
 
-.line1 {
- width: 1380px;
- margin-left: auto; 
-margin-right: auto; 
-}
 
-.equipo {
- margin-top: 60px;
- /*margin-bottom: 100px;*/
- display: flex;
- margin-left: 260px;
- flex-direction: row;
+/* Formulario Crear Producto Admin */
+.c-p-contenedor{
+  padding: 2%;
 }
-
-.equipo img {
-  width: 40%;
-  height: auto;
-  
+.c-p-div{
+  padding: 1.5%;
+  width: 460px;
+  border-radius: 10px;
+  background-color:#697984;
 }
-
-.pie {
-  margin-left: 260px;
-  margin-bottom: 100px;
-  margin-top: 5px;
-  font-style:italic;
-}
-
-.nosotros {
-  
-  flex: 1;
-  margin-left: 20px;
-}
+  .c-p-form{
+    background-color: white;
+    width: 410px;
+    text-align: right;
+    padding: 2%;
+    border-radius: 12px;
+  }
+    .c-p-form label{
+      margin-right: 10px;
+      margin-top: 10px;
+    }
+    .c-p-form input{
+      border-radius: 5px;
+      border: 1px solid black;
+    }
+    .div-boton{
+      text-align: center;
+    }
 
 
 @media (max-width: 480px) {

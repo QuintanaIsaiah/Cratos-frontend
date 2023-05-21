@@ -40,7 +40,7 @@ const ProductosAdminCrear = () => {
 
     function crearProductos(){
 
-        alert(productos.imagen);
+        //alert(productos.imagen);
 
         let valor = [];
         valor[0] = productos.nombre;
@@ -55,20 +55,21 @@ const ProductosAdminCrear = () => {
                 console.log("LA PH DEVUELVE : "+resultado2.data);
     
                 if (resultado2.data === 1) {
-                alert("Se ha creado el producto");
+                //alert("Se ha creado el producto");
                 history("/ProductosAdmin");
 
                 } else {
-                alert("No se ha podido crear el producto");
+                alert("Rellena todos los campos para poder crear un producto");
                 }
             });
 
     }
     return (
-        <div>
+        <div className="c-p-contenedor">
+            <div className="c-p-div">
             <h3>Crear un nuevo producto</h3>
                 <br></br>
-            <form>
+            <form className="c-p-form">
                 <label>Nombre: </label>
                     <input type="text" value={productos.nombre} onChange={handleNombreChange}></input>
                         <br></br>
@@ -94,8 +95,11 @@ const ProductosAdminCrear = () => {
                     <input type="file" onChange={handleImagenChange}></input>
                         <br></br>
                         <br></br>
-                <input type="button" value="CREAR" onClick={crearProductos}></input>
+                <div className="div-boton">
+                    <input type="button" value="CREAR" onClick={crearProductos}></input>
+                </div>
             </form>
+            </div>
         </div>
     )
 }

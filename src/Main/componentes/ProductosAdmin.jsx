@@ -41,7 +41,7 @@ const ProductosAdmin = () => {
 
             console.log(resultado.data);
             if(resultado.data === 1){
-            alert ("producto eliminado correctamente");
+            //alert ("producto eliminado correctamente");
             actualizarProductos();
             }
             else{
@@ -52,33 +52,37 @@ const ProductosAdmin = () => {
 
 
     return (
-        <div>
-            <div>
+        <div className="t-p-container">
+            <div className="t-p-div">
                 <h2 onClick={actualizarProductos}>Todos los productos</h2>
-                <Link to={"/ProductosAdminCrear"}><input type="button" value="CREAR PRODUCTO +"></input></Link>
+                <Link to={"/ProductosAdminCrear"}><input className="b-t-crear" type="button" value="CREAR PRODUCTO  +"></input></Link>
+                <Link to={"/ProductosAdminActualizar"}><input className="b-t-crear" type="button" value="ACTUALIZAR PRODUCTO  +"></input></Link>
  
-                <div>
-                    {productos.lista.map((listado, key) => (
-                    <table>
-                        <tr key={key}>
+                <div className="t-p-listado">
+                    
+                <table className="t-p-tabla">
+                        <tr className="t1-p-tr">
                             <td>ID</td>
                             <td>Nombre</td>
                             <td>Categoria</td>
                             <td>Descripcion</td>
                             <td>Precio</td>
-                            <td>Porcentaje Oferta</td>
+                            <td>Oferta</td>
                         </tr>
-                        <tr>
+                    
+                        {productos.lista.map((listado, key) => (
+                    
+                        <tr key={key} className="t2-p-tr">
                             <td>{listado[0]}</td>
                             <td>{listado[1]}</td>
                             <td>{listado[2]}</td>
                             <td>{listado[3]}</td>
-                            <td>{listado[4]}</td>
-                            <td>{listado[5]}</td>
-                            <div><input type="button" name="eliminar" value="ELIMINAR" onClick={() => eliminarProducto(listado[0])}></input></div>
+                            <td>{listado[4]+"€"}</td>
+                            <td>{listado[5]+"%"}</td>
+                            <td><input className="b-t-eliminar" type="button" name="eliminar" value="ELIMINAR" onClick={() => eliminarProducto(listado[0])}></input></td>
                         </tr>
+                        ))}
                     </table>
-                    ))}
                 </div>
             </div>
 
