@@ -2,6 +2,7 @@ import "../index.css";
 import logo_blanco1 from '../Main/img/logo_blanco1.svg';
 import { Modal, ModalBody } from 'reactstrap';
 import { useState } from 'react';
+import { Link} from "react-router-dom";
 
 const Footer = () => {
   const [mostrarPopup, setMostrarPopup] = useState(false);
@@ -32,7 +33,7 @@ Al utilizar este sitio web, usted acepta el uso de cookies de acuerdo con nuestr
       </div>
       <div className="linksContainer">
         <span onClick={mostrarPopupCookies}>Cookies</span>
-        <span>Quiénes somos</span>
+        <Link to="/QuienesSomos" className="quienesSomos">Quiénes somos</Link>
         <span onClick={abrirOutlook}>Contacto</span>
       </div>
        <Modal isOpen={mostrarPopup} toggle={cerrarPopupCookies} centered>

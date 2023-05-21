@@ -7,6 +7,7 @@ import Login from "./Inicio/Login";
 import Register from "./Inicio/Register";
 import Carro from "./Inicio/Carro";
 import Detalle from './Main/componentes/Detalle';
+import QuienesSomos from './Main/componentes/QuienesSomos';
 import ProductosAdmin from "./Main/componentes/ProductosAdmin";
 import ProductosAdminCrear from "./Main/componentes/ProductosAdminCrear";
 
@@ -35,7 +36,7 @@ root.render(
     <Route path="/Usuario" element={<Usuario/>}></Route>
     <Route path="/mainAdmin" element={<MainAdmin />}></Route>
     <Route path="/Detalle/:tipo/:id" element={<Detalle />} />
-
+    <Route path="/QuienesSomos" element={<QuienesSomos />}></Route>
     <Route path="/ProductosAdmin" element={<ProductosAdmin/>}></Route>
     <Route path="/ProductosAdminCrear" element={<ProductosAdminCrear/>}></Route>
       {/* <Route path="/" element={<Inicio />}></Route>
