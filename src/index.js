@@ -2,7 +2,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import Main from "./Main/index";
 import NavBar from "./shared/NavBar";
-//import Footer from "./shared/Footer";
+import Footer from "./shared/Footer";
 import Login from "./Inicio/Login";
 import Register from "./Inicio/Register";
 import Carro from "./Inicio/Carro";
@@ -24,7 +24,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
+    <div>
     <NavBar />
+    <div className="content">
     <Routes>
     <Route path="/" element={<Main />}></Route>
     <Route path="/Login" element={<Login />}></Route>
@@ -42,8 +44,9 @@ root.render(
       <Route path="/Main" element={<Main />}></Route>
       <Route path="/MainAdmin" element={<MainAdmin />}></Route> */}
     </Routes>
-    
-    {/* <Footer /> */}
+    </div>
+    <Footer />
+    </div>
   </BrowserRouter>
   //commit de prueba
 );

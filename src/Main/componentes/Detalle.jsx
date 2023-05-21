@@ -60,12 +60,12 @@ const Detalle = () => {
       {Object.keys(item).length !== 0 ? ( // Si el objeto producto tiene propiedades, se muestra la información
         <div>
           <div className='foto_detalle'>
-            <img src={(`../img/${item.nombre}.jpg`).default} alt={item.nombre} />
+            <img src={(`../img/${item[0]}.jpg`).default} alt={item.nombre} />
           </div>
           <div className='descripcion_detalle'>
-            <h2>{item.nombre}</h2>
-            <p>{item.descripcion}</p>
-            <p>Precio: {item.precio} €</p>
+            <h2>{item[1]}</h2>
+            <p>{item[2]}</p>
+            <p>Precio: {item[3]} €</p>
             <button>Añadir al carrito</button>
           </div>
         </div>
