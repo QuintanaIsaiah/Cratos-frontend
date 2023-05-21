@@ -582,6 +582,56 @@ code {
       text-align: center;
     }
 
+    .quienesSomos {
+  color: white;
+  text-decoration: none;
+  margin-right: 200px;
+}
+
+/*Quienes Somos */
+
+.titulo-q h2 {
+  margin-top: 50px;
+  margin-bottom: 40px;
+  text-align: center;
+  font-size: 24px;
+  font-style: black;
+  align-items: flex-start;
+}
+
+.line1 {
+ width: 1380px;
+ margin-left: auto; 
+margin-right: auto; 
+}
+
+.equipo {
+ margin-top: 60px;
+ /*margin-bottom: 100px;*/
+ display: flex;
+ margin-left: 260px;
+ flex-direction: row;
+}
+
+.equipo img {
+  width: 40%;
+  height: auto;
+  
+}
+
+.pie {
+  margin-left: 260px;
+  margin-bottom: 100px;
+  margin-top: 5px;
+  font-style:italic;
+}
+
+.nosotros {
+  
+  flex: 1;
+  margin-left: 20px;
+}
+
 
 @media (max-width: 480px) {
   /* Estilos para pantallas de hasta 480px de ancho */
