@@ -15,6 +15,8 @@ import Usuario from "./Inicio/Usuario";
 
 import MainAdmin from "./MainAdmin";
 
+import ProductosAdminActualizar from "./Main/componentes/ProductosAdminActualizar";
+
 
 // import Inicio from "./Inicio";
 // import Main from "./Main";
@@ -39,6 +41,7 @@ root.render(
     <Route path="/QuienesSomos" element={<QuienesSomos />}></Route>
     <Route path="/ProductosAdmin" element={<ProductosAdmin/>}></Route>
     <Route path="/ProductosAdminCrear" element={<ProductosAdminCrear/>}></Route>
+    <Route path="/ProductosActualizar" element={<ProductosAdminActualizar/>}></Route>
       {/* <Route path="/" element={<Inicio />}></Route>
       <Route path="/Login" element={<Login />}></Route>
       <Route path="/Register" element={<Register />}></Route>

@@ -3,8 +3,12 @@ import { useState} from "react";
 import axios from "axios";
 //import { functionsIn } from "lodash";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
-const ProductosAdminCrear = () => {
+const ProductosAdminActualizar = () => {
+
+    const id_producto_admin = localStorage.getItem("id_producto");
+    console.log(id_producto_admin);
 
     const history = useNavigate();
 
@@ -13,8 +17,7 @@ const ProductosAdminCrear = () => {
         categoria:"",
         descripcion:"",
         precio:"",
-        porcentaje_oferta:"",
-        imagen:null
+        porcentaje_oferta:""
       });
 
     const handleNombreChange = (event) => {
@@ -33,12 +36,7 @@ const ProductosAdminCrear = () => {
         setProductos({ ...productos, porcentaje_oferta: event.target.value });
     };
 
-    const handleImagenChange = (event) => {
-        const file = event.target.files[0];
-        setProductos({ ...productos, imagen: file });
-      };
-
-    function crearProductos(){
+    function actualizarProductos(){
 
         //alert(productos.imagen);
 
@@ -48,25 +46,43 @@ const ProductosAdminCrear = () => {
         valor[2] = productos.descripcion;
         valor[3] = productos.precio;
         valor[4] = productos.porcentaje_oferta;
+        valor[5] = id_producto_admin;
         
-        axios.post("http://localhost/Cratos-backend/ProductosAdminCrear.php", valor)
+        axios.post("http://localhost/Cratos-backend/ProductosAdminActualizar.php", valor)
             .then((resultado2) => {
                 console.log("LA PH DEVUELVE : "+resultado2.data);
-    
-                if (resultado2.data === 1) {
-                //alert("Se ha creado el producto");
-                history("/ProductosAdmin");
-
-                } else {
-                alert("Rellena todos los campos para poder crear un producto");
+                if(resultado2.data === 1){
+                    history("/ProductosAdmin");
+                }
+                else{
+                    alert("No se ha podido actualizar el producto");
                 }
             });
 
     }
+
+    
+    const [productos2, setProductos2] = useState({
+        lista:[]
+      });
+    //Indicamos que ejecute getProductos una vez
+    useEffect(() => {
+        getProductos();
+    }, []);
+
+    function getProductos() {
+        axios.post("http://localhost/Cratos-backend/select1producto.php",id_producto_admin)
+          .then(function (resultado) {
+            console.log(resultado.data);
+            setProductos2({ lista: resultado.data });
+          });
+    }
+    
+
     return (
         <div className="c-p-contenedor">
             <div className="c-p-div">
-            <h3>Crear un nuevo producto</h3>
+            <h3>Actualizar producto</h3>
                 <br></br>
             <form className="c-p-form">
                 <label>Nombre: </label>
@@ -89,18 +105,45 @@ const ProductosAdminCrear = () => {
                     <input type="number" value={productos.porcentaje_oferta} onChange={handleOfertaChange}></input>
                         <br></br>
                         <br></br>
-                        <br></br>
-                <label>Imagen: </label>
-                    <input type="file" onChange={handleImagenChange}></input>
-                        <br></br>
-                        <br></br>
                 <div className="div-boton">
-                    <input type="button" value="CREAR" onClick={crearProductos}></input>
+                    <input className="b-t-crear" type="button" value="Actualizar" onClick={actualizarProductos}></input>
                 </div>
             </form>
+            </div>
+
+            <div>
+                    {productos2.lista.map((listado) => (
+                    
+                    <div className="c-p-div2">
+                        <h3>Producto seleccionado</h3>
+                            <br></br>
+                        <form className="c-p-form2">
+                            <label>Nombre: </label>
+                                <span>{listado[1]}</span>
+                                    <br></br>
+                                    <br></br>
+                            <label>Categoria: </label>
+                                <span>{listado[2]}</span>
+                                    <br></br>
+                                    <br></br>
+                            <label>Descripcion: </label>
+                                <span>{listado[3]}</span>
+                                    <br></br>
+                                    <br></br>
+                            <label>Precio: </label>
+                                <span>{listado[4]+"€"}</span>
+                                    <br></br>
+                                    <br></br>
+                            <label>Porcentaje Oferta: </label>
+                                <span>{listado[5]+"%"}</span>
+                                    <br></br>
+                                    <br></br>
+                        </form>
+                    </div>
+                    ))}
             </div>
         </div>
     )
 }
 
-export default ProductosAdminCrear;
+export default ProductosAdminActualizar;

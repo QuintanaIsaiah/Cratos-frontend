@@ -2,6 +2,7 @@ import { Nav, Table } from "rsuite";
 import HomeIcon from "@rsuite/icons/legacy/Home";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ProductosAdmin from "../Main/componentes/ProductosAdmin";
 
 const MainAdmin = () => {
   const [active, setActive] = useState("home");
@@ -60,10 +61,14 @@ const MainAdmin = () => {
   };
 
   return (
-    <>
+    <div>
       <Navbar appearance="tabs" reversed active={active} onSelect={setActive} />
       {action === "Usuarios" }
-    </>
+
+      
+      <ProductosAdmin/>
+
+    </div>
   );
 };
 

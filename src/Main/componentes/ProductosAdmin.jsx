@@ -2,10 +2,12 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 //import { useNavigate } from "react-router-dom";
 
 const ProductosAdmin = () => {
    
+    const history = useNavigate();
 
     const [productos, setProductos] = useState({
         lista: [],
@@ -50,13 +52,19 @@ const ProductosAdmin = () => {
         });
     }
 
+    //Creamos una funcion para guardar la ID del producto que queremos modificar y lo redirigimos a otra pagina
+    function actualizarProducto(id){
+
+      localStorage.setItem("id_producto", id);
+      history("/ProductosActualizar");
+    }
+
 
     return (
         <div className="t-p-container">
             <div className="t-p-div">
                 <h2 onClick={actualizarProductos}>Todos los productos</h2>
                 <Link to={"/ProductosAdminCrear"}><input className="b-t-crear" type="button" value="CREAR PRODUCTO  +"></input></Link>
-                <Link to={"/ProductosAdminActualizar"}><input className="b-t-crear" type="button" value="ACTUALIZAR PRODUCTO  +"></input></Link>
  
                 <div className="t-p-listado">
                     
@@ -80,6 +88,7 @@ const ProductosAdmin = () => {
                             <td>{listado[4]+"€"}</td>
                             <td>{listado[5]+"%"}</td>
                             <td><input className="b-t-eliminar" type="button" name="eliminar" value="ELIMINAR" onClick={() => eliminarProducto(listado[0])}></input></td>
+                            <td><input className="b-t-eliminar" type="button" name="actualizar" value="ACTUALIZAR" onClick={() => actualizarProducto(listado[0])}></input></td>
                         </tr>
                         ))}
                     </table>

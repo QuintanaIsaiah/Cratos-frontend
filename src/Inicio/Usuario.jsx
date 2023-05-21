@@ -6,6 +6,7 @@ const Usuario = () => {
 
   useEffect(() => {
     const usuarioAlmacenado = localStorage.getItem("usuario");
+    //console.log(usuarioAlmacenado);
     if (usuarioAlmacenado) {
       setNombreUsuario(usuarioAlmacenado);
 

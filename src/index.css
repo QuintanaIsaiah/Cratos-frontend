@@ -556,16 +556,18 @@ code {
 /* Formulario Crear Producto Admin */
 .c-p-contenedor{
   padding: 2%;
+  display: flex;
 }
 .c-p-div{
-  padding: 1.5%;
+  padding: 1%;
   width: 460px;
   border-radius: 10px;
   background-color:#697984;
+  display: inline-block;
 }
   .c-p-form{
     background-color: white;
-    width: 410px;
+    width: 100%;
     text-align: right;
     padding: 2%;
     border-radius: 12px;
@@ -580,6 +582,37 @@ code {
     }
     .div-boton{
       text-align: center;
+    }
+
+    .quienesSomos {
+  color: white;
+  text-decoration: none;
+  margin-right: 200px;
+}
+
+/* Formulario Mostrar producto admin */
+.c-p-div2{
+  margin-left: 100px;
+  padding: 2%;
+  width: 350px;
+  border-radius: 10px;
+  background-color:#697984;
+  display: inline-block;
+}
+  .c-p-form2{
+    background-color: white;
+    width: 100%;
+    text-align: right;
+    padding: 2%;
+    border-radius: 12px;
+  }
+    .c-p-form2 label{
+      margin-right: 10px;
+      margin-top: 10px;
+      font-weight: 600;
+    }
+    .c-p-form2 span{
+      margin-right: 25%;
     }
 
     .quienesSomos {
