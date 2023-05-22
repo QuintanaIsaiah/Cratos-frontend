@@ -13,6 +13,7 @@ const NavBar = () => {
   }
 
   return (
+    <nav>
     <div className="NavBarContainer">
       <Link to={"/"} className="logo"><img src={logo_cratos} alt="Logo de la empresa" /></Link>
     <div className="navLinksContainer">
@@ -27,6 +28,7 @@ const NavBar = () => {
       <span className="linkCerrarSesion">User<Usuario></Usuario></span>
     </div>
     </div>
+    </nav>
   );
 };
 
