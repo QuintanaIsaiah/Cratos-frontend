@@ -1,76 +1,120 @@
-import { useState } from "react";
-import { useEffect } from "react";
-import React from 'react';
-import Banner from './Banner';
+import { useState, useEffect } from "react";
+import React from "react";
+import Banner from "./Banner";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-
-
 const Detalle = () => {
-
-  const { id, tipo } = useParams();
-  console.log(id, tipo);
-  const [item, setItem] = useState({});
-  //const [producto, setProducto] = useState({}); // Estado para almacenar los datos del producto
-  //const [oferta, setOferta] = useState({});
+  const [nombreUsuario, setNombreUsuario] = useState("");
+  const [idUser, setidUser] = useState("");
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        let consultaURL = '';
+      const usuarioAlmacenado = localStorage.getItem("usuario");
+      if (usuarioAlmacenado) {
+        setNombreUsuario(usuarioAlmacenado);
+      }
+    }, []);
 
-        if (tipo === 'producto') {
-          console.log(id);
-          consultaURL = `http://localhost/Cratos-backend/Productos.php?id=${id}`;
-        } else if (tipo === 'oferta') {
-          consultaURL = `http://localhost/Cratos-backend/Ofertas.php?id=${id}`;
-        }
+    useEffect(() => {
+      if (nombreUsuario) {
+        axios
+          .post("http://localhost/Cratos-backend/Usuario_Mostrar.php", {
+            usuario: nombreUsuario
+          })
+          .then((response) => {
+            console.log("IDE DEL USUARIO: " + response.data);
+            setidUser(response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    }, [nombreUsuario]);
 
-        const response = await axios.post(
-          consultaURL,
-          {
-            id: id,
-          },
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        
-        const itemData = response.data[0];
-        console.log(itemData);
-
-        setItem(itemData);
-
-      } catch (error) {
-        console.error('Error al obtener los datos del elemento:', error);
+    function añadirProducto(id) {
+      if (nombreUsuario) {
+        let valor = [];
+        valor[0] = idUser;
+        valor[1] = id;
+        axios
+          .post("http://localhost/Cratos-backend/AnyadirAcarro.php", valor)
+          .then((resultado2) => {
+            console.log("El añadir carro devuelbe : "+resultado2.data);
+  
+            if (resultado2.data === 1) {
+              alert("Producto añadido al carro");
+            } else {
+              alert("No se ha podido añadir el producto al carro");
+            }
+          });
+      } else {
+        alert("No se puede añadir al carro, no tiene usuario");
       }
     }
 
-    fetchData();
-  }, [id, tipo]);// El hook se ejecuta cuando el valor de `id` cambia
 
-  
+  const { id, tipo } = useParams();
+  console.log(id, tipo);
+  const [productos, setProductos] = useState([]);
+  const [item, setItem] = useState({});
+
+  useEffect(() => {
+    getProductos();
+  }, );
+
+
+  function getProductos() {
+    let consultaURL = "";
+
+    if (tipo === "oferta") {
+      consultaURL = "http://localhost/Cratos-backend/Ofertas.php";
+    } else if (tipo === "producto") {
+      consultaURL = "http://localhost/Cratos-backend/Productos.php";
+    }
+
+    axios
+      .get(consultaURL)
+      .then((resultado) => {
+        setProductos(resultado.data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener los datos:", error);
+      });
+  }
+
+  useEffect(() => {
+    const filteredItem = productos.find((producto) => producto[0] === id);
+    setItem(filteredItem || {});
+  }, [id, productos]);
+
+  const productosImg = require.context("../img", true);
 
   return (
-    <div className='container_detalle'>
+    <div className="container_detalle">
       <Banner />
-      {Object.keys(item).length !== 0 ? ( // Si el objeto producto tiene propiedades, se muestra la información
+      {Object.keys(item).length !== 0 ? (
         <div>
-          <div className='foto_detalle'>
-            <img src={(`../img/${item[0]}.jpg`).default} alt={item.nombre} />
+          <div className="foto_detalle">
+            {item[1] && productosImg.keys().includes(`./${item[1]}.jpg`) ? (
+              <img
+                className="o_img"
+                src={productosImg(`./${item[1]}.jpg`)}
+                alt={item[1]}
+              />
+            ) : (
+              <p>Imagen no encontrada</p>
+            )}
           </div>
-          <div className='descripcion_detalle'>
+          <div className="descripcion_detalle">
             <h2>{item[1]}</h2>
             <p>{item[2]}</p>
-            <p>Precio: {item[3]} €</p>
-            <button>Añadir al carrito</button>
+            {/* No hay campo "price" en los datos */}
+            <input type="button" id="añadir" name="añadir" value="AÑADIR AL CARRO" onClick={()=> añadirProducto(item[0])}></input>
+            
           </div>
         </div>
       ) : (
-        <p>Cargando producto...</p> 
+        <p>Cargando producto...</p>
       )}
     </div>
   );
