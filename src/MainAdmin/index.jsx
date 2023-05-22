@@ -1,73 +1,111 @@
-import { Nav, Table } from "rsuite";
-import HomeIcon from "@rsuite/icons/legacy/Home";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import ProductosAdmin from "../Main/componentes/ProductosAdmin";
+import { useState } from "react";
+import MenuHorizontal from "./componentes/MenuHorizontal";
+
+// PRODUCTOS
+import ProductosAdmin from "./componentes/ProductosAdmin";
+import ProductosAdminActualizar from "./componentes/ProductosAdminActualizar";
+import ProductosAdminCrear from "./componentes/ProductosAdminCrear";
+
+// USUARIOS
+import UsuariosAdmin from "./componentes/UsuariosAdmin";
+import UsuariosAdminActualizar from "./componentes/UsuariosAdminActualizar";
+//import UsuariosAdminCrear from "./componentes/UsuariosAdminCrear";
 
 const MainAdmin = () => {
-  const [active, setActive] = useState("home");
-  const history = useNavigate();
-  const [action, setAction] = useState("Inicio");
+  const [mostrarProductos, setMostrarProductos] = useState(false);
+  const [mostrarProductosCrear, setMostrarProductosCrear] = useState(false);
+  const [mostrarProductosActualizar, setMostrarProductosActualizar] =
+    useState(false);
+  const [mostrarUsuarios, setMostrarUsuarios] = useState(false);
+  const [mostrarUsuariosCrear, setMostrarUsuariosCrear] = useState(false);
+  const [mostrarUsuariosActualizar, setMostrarUsuariosActualizar] =
+    useState(false);
 
-
-
-  const Navbar = ({ active, onSelect, ...props }) => {
-    return (
-      <Nav
-        {...props}
-        activeKey={active}
-        onSelect={onSelect}
-        style={{ marginBottom: 50 }}
-      >
-        <Nav.Item
-          eventKey="home"
-          icon={<HomeIcon />}
-          onClick={() => handleHome}
-        >
-          Inicio
-        </Nav.Item>
-        <Nav.Item
-          eventKey="news"
-          onClick={() => {
-            handleUsuarios();
-            setAction("Usuarios");
-          }}
-        >
-          Usuarios
-        </Nav.Item>
-        <Nav.Item eventKey="solutions">Solutions</Nav.Item>
-        <Nav.Item eventKey="products">Products</Nav.Item>
-        <Nav.Item eventKey="about">About</Nav.Item>
-      </Nav>
-    );
+  const handleClickProductos = () => {
+    setMostrarProductos(true);
+    setMostrarProductosCrear(false);
+    setMostrarProductosActualizar(false);
+    setMostrarUsuarios(false);
+    setMostrarUsuariosCrear(false);
+    setMostrarUsuariosActualizar(false);
   };
 
-  const tablaUsuarios = () => {
-    return (<>
-    <Table>
-        <Table.Column>
-            
-        </Table.Column>
-    </Table>
-    </>);
-  }
-
-  const handleHome = () => {
-    history("/MainAdmin");
+  const handleClickProductosCrear = () => {
+    setMostrarProductos(false);
+    setMostrarProductosCrear(true);
+    setMostrarProductosActualizar(false);
+    setMostrarUsuarios(false);
+    setMostrarUsuariosCrear(false);
+    setMostrarUsuariosActualizar(false);
   };
 
-  const handleUsuarios = () => {
-    return <h1>Hola</h1>;
+  const handleClickProductosActualizar = () => {
+    setMostrarProductos(false);
+    setMostrarProductosCrear(false);
+    setMostrarProductosActualizar(true);
+    setMostrarUsuarios(false);
+    setMostrarUsuariosCrear(false);
+    setMostrarUsuariosActualizar(false);
+  };
+
+  const handleClickUsuarios = () => {
+    setMostrarProductos(false);
+    setMostrarProductosCrear(false);
+    setMostrarProductosActualizar(false);
+    setMostrarUsuarios(true);
+    setMostrarUsuariosCrear(false);
+    setMostrarUsuariosActualizar(false);
+  };
+
+  const handleClickUsuariosCrear = () => {
+    setMostrarProductos(false);
+    setMostrarProductosCrear(false);
+    setMostrarProductosActualizar(false);
+    setMostrarUsuarios(false);
+    setMostrarUsuariosCrear(true);
+    setMostrarUsuariosActualizar(false);
+  };
+
+  const handleClickUsuariosActualizar = () => {
+    setMostrarProductos(false);
+    setMostrarProductosCrear(false);
+    setMostrarProductosActualizar(false);
+    setMostrarUsuarios(false);
+    setMostrarUsuariosCrear(false);
+    setMostrarUsuariosActualizar(true);
   };
 
   return (
     <div>
-      <Navbar appearance="tabs" reversed active={active} onSelect={setActive} />
-      {action === "Usuarios" }
+      {/* MENU CABECERA */}
+      <MenuHorizontal
+        handleClickUsuarios={handleClickUsuarios}
+        handleClickProductos={handleClickProductos}
+      />
+      {/* PRODUCTOS */}
+      {mostrarProductos && (
+        <ProductosAdmin
+          handleClickProductosCrear={handleClickProductosCrear}
+          handleClickProductosActualizar={handleClickProductosActualizar}
+        />
+      )}
+      {mostrarProductosCrear && (
+        <ProductosAdminCrear handleClickProductos={handleClickProductos} />
+      )}
+      {mostrarProductosActualizar && (
+        <ProductosAdminActualizar handleClickProductos={handleClickProductos} />
+      )}
+      {/* USUARIOS */}
+      {mostrarUsuarios && (
+        <UsuariosAdmin
+          handleClickUsuariosCrear={handleClickUsuariosCrear}
+          handleClickUsuariosActualizar={handleClickUsuariosActualizar}
+        />
+      )}
 
-      
-      <ProductosAdmin/>
-
+      {mostrarUsuariosActualizar && (
+        <UsuariosAdminActualizar handleClickUsuarios={handleClickUsuarios} />
+      )}
     </div>
   );
 };

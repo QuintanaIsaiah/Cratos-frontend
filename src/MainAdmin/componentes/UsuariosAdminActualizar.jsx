@@ -1,0 +1,173 @@
+import React from "react";
+import { useState } from "react";
+import axios from "axios";
+//import { functionsIn } from "lodash";
+import { useEffect } from "react";
+const ProductosAdminActualizar = ({ handleClickUsuarios }) => {
+  const id_producto_admin = localStorage.getItem("id_producto");
+
+  const [usuarios, setUsuarios] = useState({
+    nombre: "",
+    correo: "",
+    edad: "",
+    contrasenya: "",
+    admin: "",
+  });
+
+  const handleNombreChange = (event) => {
+    setUsuarios({ ...usuarios, nombre: event.target.value });
+  };
+  const handleCorreoChange = (event) => {
+    setUsuarios({ ...usuarios, correo: event.target.value });
+  };
+  const handleEdadChange = (event) => {
+    setUsuarios({ ...usuarios, edad: event.target.value });
+  };
+  const handleContrasenyaChange = (event) => {
+    setUsuarios({ ...usuarios, contrasenya: event.target.value });
+  };
+  const handleAdminChange = (event) => {
+    setUsuarios({ ...usuarios, admin: event.target.value });
+  };
+
+  function actualizarUsuarios() {
+    //alert(productos.imagen);
+
+    let valor = [];
+    valor[0] = usuarios.nombre;
+    valor[1] = usuarios.categoria;
+    valor[2] = usuarios.descripcion;
+    valor[3] = usuarios.precio;
+    valor[4] = usuarios.porcentaje_oferta;
+    valor[5] = id_producto_admin;
+
+    axios
+      .post(
+        "http://localhost/Cratos-backend/ProductosAdminActualizar.php",
+        valor
+      )
+      .then((resultado2) => {
+        console.log("LA PH DEVUELVE : " + resultado2.data);
+        if (resultado2.data === 1) {
+          handleClickUsuarios();
+        } else {
+          alert("No se ha podido actualizar el producto");
+        }
+      });
+  }
+
+  const [productos2, setProductos2] = useState({
+    lista: [],
+  });
+  //Indicamos que ejecute getProductos una vez
+  useEffect(() => {
+    getProductos();
+  }, []);
+
+  function getProductos() {
+    axios
+      .post(
+        "http://localhost/Cratos-backend/select1producto.php",
+        id_producto_admin
+      )
+      .then(function (resultado) {
+        console.log(resultado.data);
+        setProductos2((prevProductos2) => ({
+          ...prevProductos2,
+          lista: resultado.data,
+        }));
+      });
+  }
+
+  return (
+    <div className="c-p-contenedor">
+      <div className="c-p-div">
+        <h3>Actualizar producto</h3>
+        <br></br>
+        <form className="c-p-form">
+          <label>Nombre: </label>
+          <input
+            type="text"
+            value={usuarios.nombre}
+            onChange={handleNombreChange}
+          ></input>
+          <br></br>
+          <br></br>
+          <label>Categoria: </label>
+          <input
+            type="text"
+            value={usuarios.categoria}
+            onChange={handleCorreoChange}
+          ></input>
+          <br></br>
+          <br></br>
+          <label>Descripcion: </label>
+          <input
+            type="text"
+            value={usuarios.descripcion}
+            onChange={handleEdadChange}
+          ></input>
+          <br></br>
+          <br></br>
+          <label>Precio: </label>
+          <input
+            type="number"
+            value={usuarios.precio}
+            onChange={handleContrasenyaChange}
+          ></input>
+          <br></br>
+          <br></br>
+          <label>Porcentaje Oferta: </label>
+          <input
+            type="number"
+            value={usuarios.porcentaje_oferta}
+            onChange={handleAdminChange}
+          ></input>
+          <br></br>
+          <br></br>
+          <div className="div-boton">
+            <input
+              className="b-t-crear"
+              type="button"
+              value="Actualizar"
+              onClick={actualizarUsuarios}
+            ></input>
+          </div>
+        </form>
+      </div>
+
+      <div>
+        {productos2.lista.map((listado) => (
+          <div className="c-p-div2">
+            <h3>Producto seleccionado</h3>
+            <br></br>
+            <form className="c-p-form2">
+              <label>Nombre: </label>
+              <span>{listado[1]}</span>
+              <br></br>
+              <br></br>
+              <label>Categoria: </label>
+              <span>{listado[2]}</span>
+              <br></br>
+              <br></br>
+              <label>Descripcion: </label>
+              <span>{listado[3]}</span>
+              <br></br>
+              <br></br>
+              <label>Precio: </label>
+              <span>{listado[4] + "€"}</span>
+              <br></br>
+              <br></br>
+              <label>Porcentaje Oferta: </label>
+              <span>{listado[5] + "%"}</span>
+              <br></br>
+              <br></br>
+            </form>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default ProductosAdminActualizar;

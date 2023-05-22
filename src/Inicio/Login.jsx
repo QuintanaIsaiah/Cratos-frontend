@@ -41,10 +41,11 @@ const Login = () => {
 
       if (usuarioResponse.admin === "0") {
         /*PRUEBA SESION*/
-        let valor = { usuario: usuario};
-        axios.post("http://localhost/Cratos-backend/Usuario.php", valor)
-          .then(resultado => {
-            console.log("EL RESULTADO ES : "+resultado.data);
+        let valor = { usuario: usuario };
+        axios
+          .post("http://localhost/Cratos-backend/Usuario.php", valor)
+          .then((resultado) => {
+            console.log("EL RESULTADO ES : " + resultado.data);
             // Almacenar el nombre de usuario en el almacenamiento local
             localStorage.setItem("usuario", resultado.data);
             // Recargar la página para ver los cambios aplicados
@@ -66,12 +67,8 @@ const Login = () => {
         setError("Credenciales incorrectas.");
       }
       hideAlerts();
-
-      
     } catch (error) {
-      setError(
-        "No se pudo iniciar sesión. Por favor, inténtelo de nuevo."
-      );
+      setError("No se pudo iniciar sesión. Por favor, inténtelo de nuevo.");
       hideAlerts();
     }
   };
