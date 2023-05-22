@@ -61,7 +61,7 @@ const ProductosAdmin = ({
         <input
           className="b-t-crear"
           type="button"
-          value="CREAR PRODUCTO  +"
+          value="NUEVO USUARIO"
           onClick={() => handleClickUsuariosCrear()}
         ></input>
 

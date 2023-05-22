@@ -35,15 +35,15 @@ const ProductosAdminActualizar = ({ handleClickUsuarios }) => {
 
     let valor = [];
     valor[0] = usuarios.nombre;
-    valor[1] = usuarios.categoria;
-    valor[2] = usuarios.descripcion;
-    valor[3] = usuarios.precio;
-    valor[4] = usuarios.porcentaje_oferta;
+    valor[1] = usuarios.correo;
+    valor[2] = usuarios.edad;
+    valor[3] = usuarios.contrasenya;
+    valor[4] = usuarios.admin;
     valor[5] = id_producto_admin;
 
     axios
       .post(
-        "http://localhost/Cratos-backend/ProductosAdminActualizar.php",
+        "http://localhost/Cratos-backend/UsuariosAdminActualizar.php",
         valor
       )
       .then((resultado2) => {
@@ -51,7 +51,7 @@ const ProductosAdminActualizar = ({ handleClickUsuarios }) => {
         if (resultado2.data === 1) {
           handleClickUsuarios();
         } else {
-          alert("No se ha podido actualizar el producto");
+          alert("No se ha podido actualizar el usuario");
         }
       });
   }
@@ -61,19 +61,19 @@ const ProductosAdminActualizar = ({ handleClickUsuarios }) => {
   });
   //Indicamos que ejecute getProductos una vez
   useEffect(() => {
-    getProductos();
+    getUsuarios();
   }, []);
 
-  function getProductos() {
+  function getUsuarios() {
     axios
       .post(
-        "http://localhost/Cratos-backend/select1producto.php",
+        "http://localhost/Cratos-backend/select1usuario.php",
         id_producto_admin
       )
       .then(function (resultado) {
         console.log(resultado.data);
-        setProductos2((prevProductos2) => ({
-          ...prevProductos2,
+        setProductos2((prevUsuarios2) => ({
+          ...prevUsuarios2,
           lista: resultado.data,
         }));
       });
@@ -82,7 +82,7 @@ const ProductosAdminActualizar = ({ handleClickUsuarios }) => {
   return (
     <div className="c-p-contenedor">
       <div className="c-p-div">
-        <h3>Actualizar producto</h3>
+        <h3>Actualizar usuario</h3>
         <br></br>
         <form className="c-p-form">
           <label>Nombre: </label>
@@ -93,7 +93,7 @@ const ProductosAdminActualizar = ({ handleClickUsuarios }) => {
           ></input>
           <br></br>
           <br></br>
-          <label>Categoria: </label>
+          <label>Correo: </label>
           <input
             type="text"
             value={usuarios.categoria}
@@ -101,26 +101,29 @@ const ProductosAdminActualizar = ({ handleClickUsuarios }) => {
           ></input>
           <br></br>
           <br></br>
-          <label>Descripcion: </label>
+          <label>Edad: </label>
           <input
-            type="text"
+            type="number"
+            min={0}
             value={usuarios.descripcion}
             onChange={handleEdadChange}
           ></input>
           <br></br>
           <br></br>
-          <label>Precio: </label>
+          <label>Contraseña: </label>
           <input
-            type="number"
+            type="text"
             value={usuarios.precio}
             onChange={handleContrasenyaChange}
           ></input>
           <br></br>
           <br></br>
-          <label>Porcentaje Oferta: </label>
+          <label>Es administrador: </label>
           <input
             type="number"
             value={usuarios.porcentaje_oferta}
+            min={0}
+            max={1}
             onChange={handleAdminChange}
           ></input>
           <br></br>
@@ -146,20 +149,20 @@ const ProductosAdminActualizar = ({ handleClickUsuarios }) => {
               <span>{listado[1]}</span>
               <br></br>
               <br></br>
-              <label>Categoria: </label>
+              <label>Correo: </label>
               <span>{listado[2]}</span>
               <br></br>
               <br></br>
-              <label>Descripcion: </label>
+              <label>Edad: </label>
               <span>{listado[3]}</span>
               <br></br>
               <br></br>
-              <label>Precio: </label>
-              <span>{listado[4] + "€"}</span>
+              <label>Contraseña: </label>
+              <span>{listado[4]}</span>
               <br></br>
               <br></br>
-              <label>Porcentaje Oferta: </label>
-              <span>{listado[5] + "%"}</span>
+              <label>Es administrador: </label>
+              <span>{(listado[5] = 1 ? "Si" : "No")}</span>
               <br></br>
               <br></br>
             </form>

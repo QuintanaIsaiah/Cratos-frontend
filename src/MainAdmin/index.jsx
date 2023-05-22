@@ -9,6 +9,7 @@ import ProductosAdminCrear from "./componentes/ProductosAdminCrear";
 // USUARIOS
 import UsuariosAdmin from "./componentes/UsuariosAdmin";
 import UsuariosAdminActualizar from "./componentes/UsuariosAdminActualizar";
+import UsuariosAdminCrear from "./componentes/UsuariosAdminCrear";
 //import UsuariosAdminCrear from "./componentes/UsuariosAdminCrear";
 
 const MainAdmin = () => {
@@ -58,6 +59,7 @@ const MainAdmin = () => {
   };
 
   const handleClickUsuariosCrear = () => {
+    console.log("handleClickUsuariosCrear");
     setMostrarProductos(false);
     setMostrarProductosCrear(false);
     setMostrarProductosActualizar(false);
@@ -105,6 +107,10 @@ const MainAdmin = () => {
 
       {mostrarUsuariosActualizar && (
         <UsuariosAdminActualizar handleClickUsuarios={handleClickUsuarios} />
+      )}
+
+      {mostrarUsuariosCrear && (
+        <UsuariosAdminCrear handleClickUsuarios={handleClickUsuarios} />
       )}
     </div>
   );

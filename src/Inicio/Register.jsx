@@ -1,22 +1,20 @@
 import { Form, Alert, FormGroup, Label, Input, Button } from "reactstrap";
 import { useState } from "react";
 import axios from "axios";
-import {USER_REGISTER_URL}from "../shared/routes.js";
+import { USER_REGISTER_URL } from "../shared/routes.js";
 
 const Register = () => {
   const [completado, setCompletado] = useState("");
   const [error, setError] = useState("");
 
   const [nombre, setNombre] = useState("");
-  const [apellido1, setApellido1] = useState("");
-  const [apellido2, setApellido2] = useState("");
+  const [edad, setEdad] = useState(0);
   const [email, setEmail] = useState("");
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
 
   const handleNombreChange = (event) => setNombre(event.target.value);
-  const handleApellido1Change = (event) => setApellido1(event.target.value);
-  const handleApellido2Change = (event) => setApellido2(event.target.value);
+  const handleEdadCHange = (event) => setEdad(event.target.value);
   const handleEmailChange = (event) => setEmail(event.target.value);
   const handlePassword1Change = (event) => setPassword1(event.target.value);
   const handlePassword2Change = (event) => setPassword2(event.target.value);
@@ -35,14 +33,7 @@ const Register = () => {
 
     // VALIDACIONES
     // Se comprueban campos rellenos
-    if (
-      !nombre ||
-      !apellido1 ||
-      !apellido2 ||
-      !email ||
-      !password1 ||
-      !password2
-    ) {
+    if (!nombre || !edad || !email || !password1 || !password2) {
       setError("Por favor, complete todos los campos.");
       hideAlerts();
       return;
@@ -58,9 +49,7 @@ const Register = () => {
     // Creo objeto para enviar al back
     const data = {
       nombre: nombre,
-      apellido1: apellido1,
-      apellido2: apellido2,
-      edad: 0,
+      edad: edad,
       email: email,
       password: password1,
     };
@@ -106,23 +95,14 @@ const Register = () => {
           />
         </FormGroup>
         <FormGroup>
-          <Label for="apellido1">Primer Apellido</Label>
+          <Label for="apellido1">Edad</Label>
           <Input
-            type="text"
+            type="number"
+            min={0}
             id="apellido1"
             name="apellido1"
-            value={apellido1}
-            onChange={handleApellido1Change}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="apellido2">Segundo Apellido</Label>
-          <Input
-            type="text"
-            id="apellido2"
-            name="apellido2"
-            value={apellido2}
-            onChange={handleApellido2Change}
+            value={edad}
+            onChange={handleEdadCHange}
           />
         </FormGroup>
         <FormGroup>
