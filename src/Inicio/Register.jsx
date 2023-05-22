@@ -2,6 +2,7 @@ import { Form, Alert, FormGroup, Label, Input, Button } from "reactstrap";
 import { useState } from "react";
 import axios from "axios";
 import { USER_REGISTER_URL } from "../shared/routes.js";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [completado, setCompletado] = useState("");
@@ -18,6 +19,8 @@ const Register = () => {
   const handleEmailChange = (event) => setEmail(event.target.value);
   const handlePassword1Change = (event) => setPassword1(event.target.value);
   const handlePassword2Change = (event) => setPassword2(event.target.value);
+
+  const history = useNavigate();
 
   // Funcion para ocultar alertas
   const hideAlerts = () => {
@@ -63,6 +66,7 @@ const Register = () => {
       });
 
       setCompletado(response.data.message);
+      history("/");
     } catch (error) {
       setError(
         "No se pudo registrar el usuario. Por favor, inténtelo de nuevo."
