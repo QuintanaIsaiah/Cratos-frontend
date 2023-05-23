@@ -91,15 +91,12 @@ const Detalle = () => {
         
         <div div className="detalle_contenedor">
           <div className="foto_detalle">
-            {item[1] && productosImg.keys().includes(`./${item[1]}.jpg`) ? (
-              <img
-                className="ver_img"
-                src={productosImg(`./${item[1]}.jpg`)}
-                alt={item[1]}
-              />
-            ) : (
-              <p>Imagen no encontrada</p>
-            )}
+            {item[6] ? (
+                  <img className="ver_img" src={item[6]} />
+                ) : (
+                  "No se ha encontrado imagen"
+                )}
+            
           </div>
           <div className="descripcion_detalle">
             <h2 className="Nombre_Detalle">{item[1]}</h2>

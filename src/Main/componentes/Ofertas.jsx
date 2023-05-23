@@ -105,12 +105,10 @@ const Ofertas = () => {
                 <h3>{listado[1]}</h3>
               </div>
               <div className="o_img">
-                {listado[1] &&
-              productosImg.keys().includes(`./${listado[1]}.jpg`) ? (
+                {listado[6] ? (
                 <img
                   className="o_img_size"
-                  src={productosImg(`./${listado[1]}.jpg`)}
-                  alt={listado[1]}
+                  src={listado[6]}
                 />
               ) : (
                 <p>Imagen no encontrada</p>
