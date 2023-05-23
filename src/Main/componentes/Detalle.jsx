@@ -92,12 +92,14 @@ const Detalle = () => {
   return (
     <div className="container_detalle">
       <Banner />
+      <hr className="line_Ver"/>
       {Object.keys(item).length !== 0 ? (
-        <div>
+        
+        <div div className="detalle_contenedor">
           <div className="foto_detalle">
             {item[1] && productosImg.keys().includes(`./${item[1]}.jpg`) ? (
               <img
-                className="o_img"
+                className="ver_img"
                 src={productosImg(`./${item[1]}.jpg`)}
                 alt={item[1]}
               />
@@ -106,16 +108,18 @@ const Detalle = () => {
             )}
           </div>
           <div className="descripcion_detalle">
-            <h2>{item[1]}</h2>
+            <h2 className="Nombre_Detalle">{item[1]}</h2>
             <p>{item[2]}</p>
             {/* No hay campo "price" en los datos */}
             <input type="button" id="añadir" name="añadir" value="AÑADIR AL CARRO" onClick={()=> añadirProducto(item[0])}></input>
             
           </div>
         </div>
+        
       ) : (
         <p>Cargando producto...</p>
       )}
+      <hr className="line_Ver1"/>
     </div>
   );
 };
