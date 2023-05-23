@@ -1,13 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import { useEffect } from "react";
 //import { functionsIn } from "lodash";
-import { useNavigate } from "react-router-dom";
 
 const ProductosAdminCrear = ({ handleClickProductos }) => {
-  const history = useNavigate();
-
   const [productos, setProductos] = useState({
     nombre: "",
     categoria: "",
@@ -37,15 +33,15 @@ const ProductosAdminCrear = ({ handleClickProductos }) => {
   function convertirImagenABase64(file) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
-  
+
       reader.onload = (event) => {
         resolve(event.target.result);
       };
-  
+
       reader.onerror = (error) => {
         reject(error);
       };
-  
+
       reader.readAsDataURL(file);
     });
   }
@@ -53,12 +49,12 @@ const ProductosAdminCrear = ({ handleClickProductos }) => {
   const handleImagenChange = (event) => {
     const file = event.target.files[0];
     convertirImagenABase64(file)
-    .then((base64Image) => {
-      setProductos({ ...productos, imagen: base64Image });
-    })
-    .catch((error) => {
-      console.error("Error al convertir la imagen a base64:", error);
-    });
+      .then((base64Image) => {
+        setProductos({ ...productos, imagen: base64Image });
+      })
+      .catch((error) => {
+        console.error("Error al convertir la imagen a base64:", error);
+      });
   };
 
   function crearProductos() {
@@ -80,7 +76,7 @@ const ProductosAdminCrear = ({ handleClickProductos }) => {
         console.log("LA PH DEVUELVE : " + resultado2.data);
 
         if (resultado2.data === 1) {
-            window.location.reload();
+          window.location.reload();
         } else {
           alert("Rellena todos los campos para poder crear un producto");
         }

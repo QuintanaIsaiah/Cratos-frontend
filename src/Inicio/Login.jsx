@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Form, Button } from "rsuite";
 import axios from "axios";
 import { USER_LOGIN_URL } from "../shared/routes.js";
@@ -11,6 +11,7 @@ const Login = () => {
 
   const [completado, setCompletado] = useState("");
   const [error, setError] = useState("");
+
   const history = useNavigate();
 
   const hideAlerts = () => {
@@ -21,6 +22,10 @@ const Login = () => {
   };
 
   const handleSubmit = async (event) => {
+    const prueba = {
+      usuario: "Prueba",
+      accion: "Inicio de sesion",
+    };
     try {
       const response = await axios.post(
         USER_LOGIN_URL,
@@ -35,29 +40,34 @@ const Login = () => {
         }
       );
 
-      console.log(response);
-
       const usuarioResponse = response.data.resultado;
 
       if (usuarioResponse.admin === "0") {
         /*PRUEBA SESION*/
         let valor = { usuario: usuario };
-        axios
-          .post("http://localhost/Cratos-backend/Usuario.php", valor)
-          .then((resultado) => {
-            console.log("EL RESULTADO ES : " + resultado.data);
-            // Almacenar el nombre de usuario en el almacenamiento local
-            localStorage.setItem("usuario", resultado.data);
-            // Recargar la página para ver los cambios aplicados
-            //window.location.reload();
-          });
+        const resultado = await axios.post(
+          "http://localhost/Cratos-backend/Usuario.php",
+          valor
+        );
+
+        // Almacenar el nombre de usuario en el almacenamiento local
+        localStorage.setItem("usuario", resultado.data);
+        // Recargar la página para ver los cambios aplicados
+        //window.location.reload();
+        console.log("prueba");
+        console.log(prueba);
+
+        const logResponse = await axios.post(
+          "http://localhost/Cratos-backend/Log/AddLog.php",
+          prueba
+        );
+        console.log(logResponse.data);
+
         //REDIRECCIONAR AL MAIN NORMAL
         history("/");
         window.location.reload();
-        console.log("USUARIO COMUN");
       } else if (usuarioResponse.admin === "1") {
         //REDIRECCIONAR AL MAIN ADMIN
-        console.log("USUARIO ADMINISTRADOR");
         history("/MainAdmin");
       }
 
@@ -96,7 +106,7 @@ const Login = () => {
           <Form.ControlLabel>Contraseña</Form.ControlLabel>
           <Form.Control
             name="contrasenya"
-            type="contrasenya"
+            type="password"
             onChange={(value) => setContrasenya(value)}
           />
           <Form.HelpText>Required</Form.HelpText>
