@@ -187,6 +187,22 @@ code {
 
 /*Ofertas */
 
+.descuento {
+  margin-top: 30px;
+  text-align: center;
+  margin-bottom: 40px
+}
+
+.line_o{
+  width: 1900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.o_img_size{
+  width: 500px
+}
+
 .m-ofertas {
 }
 .contenedor_ofertas {

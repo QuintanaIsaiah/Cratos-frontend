@@ -96,8 +96,8 @@ const Ofertas = () => {
 
   return (
     <div>
-      <h2 onClick={actualizarProductos}>Ofertas</h2>
-
+      <h2 className="descuento" onClick={actualizarProductos}>¡HASTA UN 50% DE DESCUENTO!</h2>
+      <hr className="line_o"/>
       <div className="contenedor_ofertas">
         {productos.lista.map((listado, key) => (
           <div className="div_ofertas" key={key}>
@@ -106,11 +106,16 @@ const Ofertas = () => {
                 <h3>{listado[1]}</h3>
               </div>
               <div className="o_img">
-                {listado[6] ? (
-                  <img src={listado[6]} />
-                ) : (
-                  "No se ha encontrado imagen"
-                )}
+                {listado[1] &&
+              productosImg.keys().includes(`./${listado[1]}.jpg`) ? (
+                <img
+                  className="o_img_size"
+                  src={productosImg(`./${listado[1]}.jpg`)}
+                  alt={listado[1]}
+                />
+              ) : (
+                <p>Imagen no encontrada</p>
+              )}
               </div>
             </div>
 
