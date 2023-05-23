@@ -4,11 +4,16 @@ import { Link } from "react-router-dom";
 import Usuario from "../Inicio/Usuario";
 import logo_cratos from "../Main/img/logo_cratos.svg";
 import { AddLog } from "../shared/AddLog";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
+
+  const history = useNavigate();
+
   function cerrarSesion() {
     AddLog(localStorage.getItem("usuario"), "Log out");
     localStorage.setItem("usuario", "");
+    history("/");
     window.location.reload();
   }
 

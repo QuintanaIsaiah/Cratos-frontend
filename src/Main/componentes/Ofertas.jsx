@@ -79,6 +79,7 @@ const Ofertas = () => {
       axios
         .post("http://localhost/Cratos-backend/AnyadirAcarro.php", valor)
         .then((resultado2) => {
+          console.log(resultado2.data);
           if (resultado2.data === 1) {
             mostrarPopupCookies("Se ha añadido el producto en tu carro");
           } else {
@@ -91,8 +92,6 @@ const Ofertas = () => {
       );
     }
   }
-  //Creamos constante donde almacene la imagenes en una variable
-  const productosImg = require.context("../img", true);
 
   return (
     <div>
