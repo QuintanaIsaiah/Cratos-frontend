@@ -30,34 +30,6 @@ const ProductosAdminCrear = ({ handleClickProductos }) => {
     setProductos({ ...productos, porcentaje_oferta: event.target.value });
   };
 
-  //PArseamos la imagen a BASE64
-  function convertirImagenABase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-
-      reader.onload = (event) => {
-        resolve(event.target.result);
-      };
-
-      reader.onerror = (error) => {
-        reject(error);
-      };
-
-      reader.readAsDataURL(file);
-    });
-  }
-  //Guardamos la imagen en productos.imagen
-  const handleImagenChange = (event) => {
-    const file = event.target.files[0];
-    convertirImagenABase64(file)
-      .then((base64Image) => {
-        setProductos({ ...productos, imagen: base64Image });
-      })
-      .catch((error) => {
-        console.error("Error al convertir la imagen a base64:", error);
-      });
-  };
-
   function crearProductos() {
     //alert(productos.imagen);
 
@@ -68,6 +40,9 @@ const ProductosAdminCrear = ({ handleClickProductos }) => {
     valor[3] = productos.precio;
     valor[4] = productos.porcentaje_oferta;
     valor[5] = productos.imagen;
+
+    console.log("valor");
+    console.log(valor);
 
     handleClickProductos();
 
@@ -85,6 +60,26 @@ const ProductosAdminCrear = ({ handleClickProductos }) => {
         }
       });
   }
+
+  //Guardamos la imagen en productos.imagen
+  const handleImagenChange = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+      const imageData = e.target.result; // Datos de la imagen en formato base64
+
+      // Asignar los datos de la imagen en base64 al campo "imagen" del objeto de productos
+      productos.imagen = imageData;
+
+      // Aquí puedes realizar cualquier otra acción con el objeto de productos, como enviarlo al servidor o almacenarlo en algún lugar.
+
+      console.log(productos);
+    };
+
+    reader.readAsDataURL(file);
+  };
+
   return (
     <div className="c-p-contenedor">
       <div className="c-p-div">
