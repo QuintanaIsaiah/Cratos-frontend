@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { USER_REGISTER_URL } from "../shared/routes.js";
 import { useNavigate } from "react-router-dom";
+import { AddLog } from "../shared/AddLog.js";
 
 const Register = () => {
   const [completado, setCompletado] = useState("");
@@ -66,6 +67,7 @@ const Register = () => {
       });
 
       setCompletado(response.data.message);
+      AddLog(response.data.resultado.nombre, "Registered");
       history("/");
     } catch (error) {
       setError(

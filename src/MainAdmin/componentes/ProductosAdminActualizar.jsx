@@ -4,6 +4,7 @@ import axios from "axios";
 //import { functionsIn } from "lodash";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { AddLog } from "../../shared/AddLog";
 const ProductosAdminActualizar = ({ handleClickProductos }) => {
   const id_producto_admin = localStorage.getItem("id_producto");
 
@@ -48,9 +49,12 @@ const ProductosAdminActualizar = ({ handleClickProductos }) => {
         valor
       )
       .then((resultado2) => {
-        console.log("LA PH DEVUELVE : " + resultado2.data);
         if (resultado2.data === 1) {
           handleClickProductos();
+          AddLog(
+            localStorage.getItem("usuario"),
+            `Update product with id ${id_producto_admin}`
+          );
         } else {
           alert("No se ha podido actualizar el producto");
         }
@@ -72,16 +76,12 @@ const ProductosAdminActualizar = ({ handleClickProductos }) => {
         id_producto_admin
       )
       .then(function (resultado) {
-        console.log(resultado.data);
         setProductos2((prevProductos2) => ({
           ...prevProductos2,
           lista: resultado.data,
         }));
       });
   }
-
-  console.log("==========>");
-  console.log(productos2.lista[0]?.[1]);
 
   return (
     <div className="c-p-contenedor">

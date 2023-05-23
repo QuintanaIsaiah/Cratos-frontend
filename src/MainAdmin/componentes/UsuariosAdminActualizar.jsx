@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 //import { functionsIn } from "lodash";
 import { useEffect } from "react";
+import { AddLog } from "../../shared/AddLog";
 const ProductosAdminActualizar = ({ handleClickUsuarios }) => {
   const id_producto_admin = localStorage.getItem("id_producto");
 
@@ -47,9 +48,12 @@ const ProductosAdminActualizar = ({ handleClickUsuarios }) => {
         valor
       )
       .then((resultado2) => {
-        console.log("LA PH DEVUELVE : " + resultado2.data);
         if (resultado2.data === 1) {
           handleClickUsuarios();
+          AddLog(
+            localStorage.getItem("usuario"),
+            `Update user with id ${id_producto_admin}`
+          );
         } else {
           alert("No se ha podido actualizar el usuario");
         }
@@ -71,7 +75,6 @@ const ProductosAdminActualizar = ({ handleClickUsuarios }) => {
         id_producto_admin
       )
       .then(function (resultado) {
-        console.log(resultado.data);
         setProductos2((prevUsuarios2) => ({
           ...prevUsuarios2,
           lista: resultado.data,

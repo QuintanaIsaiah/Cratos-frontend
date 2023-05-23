@@ -23,6 +23,7 @@ import MainAdmin from "./MainAdmin";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
 root.render(
   <BrowserRouter>
     <div>
@@ -46,11 +47,6 @@ root.render(
             path="/ProductosActualizar"
             element={<ProductosAdminActualizar />}
           ></Route>
-          {/* <Route path="/" element={<Inicio />}></Route>
-      <Route path="/Login" element={<Login />}></Route>
-      <Route path="/Register" element={<Register />}></Route>
-      <Route path="/Main" element={<Main />}></Route>
-      <Route path="/MainAdmin" element={<MainAdmin />}></Route> */}
         </Routes>
       </div>
       <Footer />

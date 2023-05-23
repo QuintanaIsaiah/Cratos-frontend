@@ -17,7 +17,7 @@ const Main = () => {
       try {
         await axios.post(CONNECTION_URL);
       } catch (error) {
-        // console.log(error);
+        console.log(error);
       }
     };
     crearDB();
@@ -45,26 +45,26 @@ const Main = () => {
   let ComponenteValor;
 
   //Hacemos condiciones de que si el valor que hay en el estado es = productos guarde en la variable anterior el compoente Productos
-  //   if (categoriaSeleccionada === "Productos") {
-  //     ComponenteValor = <Productos />;
-  //   } else if (categoriaSeleccionada === "Categoria1") {
-  //     ComponenteValor = <Categoria1 />;
-  //   } else if (categoriaSeleccionada === "Categoria2") {
-  //     ComponenteValor = <Categoria2 />;
-  //   } else if (categoriaSeleccionada === "Categoria3") {
-  //     ComponenteValor = <Categoria3 />;
-  //   } else {
-  //     ComponenteValor = <Productos />;
-  //   }
+  if (categoriaSeleccionada === "Productos") {
+    ComponenteValor = <Productos />;
+  } else if (categoriaSeleccionada === "Categoria1") {
+    ComponenteValor = <Categoria1 />;
+  } else if (categoriaSeleccionada === "Categoria2") {
+    ComponenteValor = <Categoria2 />;
+  } else if (categoriaSeleccionada === "Categoria3") {
+    ComponenteValor = <Categoria3 />;
+  } else {
+    ComponenteValor = <Productos />;
+  }
 
   return (
     <div>
       <div className="m-banner">
         <Banner />
       </div>
-      {/* <div className="m-ofertas">
+      <div className="m-ofertas">
         <Ofertas />
-      </div> */}
+      </div>
       <div className="m-categorias">
         <div onClick={seleccionarTodos}>
           <h3>Todos los productos</h3>

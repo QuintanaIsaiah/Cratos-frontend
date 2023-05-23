@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { AddLog } from "../../shared/AddLog";
 //import { functionsIn } from "lodash";
 
 const UsuariosAdminCrear = ({ handleClickUsuarios: handleClickUsuarios }) => {
@@ -42,14 +43,15 @@ const UsuariosAdminCrear = ({ handleClickUsuarios: handleClickUsuarios }) => {
     valor[3] = usuarios.contrasenya;
     valor[4] = usuarios.admin;
 
-    console.log("=========> SE ENVIA:");
-    console.log(valor);
     axios
       .post("http://localhost/Cratos-backend/UsuariosAdminCrear.php", valor)
       .then((resultado2) => {
-        console.log("LA PH DEVUELVE : " + resultado2.data);
         if (resultado2.data === 1) {
           //alert("Se ha creado el producto");
+          AddLog(
+            localStorage.getItem("usuario"),
+            `Create new user named ${usuarios.nombre}`
+          );
           handleClickUsuarios();
         } else {
           alert("Rellena todos los campos para poder crear un producto");

@@ -25,7 +25,6 @@ const Carro = () => {
           usuario: nombreUsuario,
         })
         .then((response) => {
-          console.log("IDE DEL USUARIO: " + response.data);
           setidUser(response.data);
         })
         .catch((error) => {
@@ -71,7 +70,6 @@ const Carro = () => {
     axios
       .post("http://localhost/Cratos-backend/EliminarProductoCarro.php", valor)
       .then(function (resultado) {
-        console.log(resultado.data);
         if (resultado.data === 1) {
           //alert ("producto eliminado correctamente");
           actualizarProductos();
@@ -108,7 +106,6 @@ const Carro = () => {
     axios
       .post("http://localhost/Cratos-backend/ElimiinarCarro.php", valor)
       .then(function (resultado) {
-        console.log(resultado.data);
         if (resultado.data === 1) {
           //alert ("Tu compra ha sido realizada");
           actualizarProductos();
