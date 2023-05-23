@@ -7,7 +7,7 @@ import logo_cratos from '../Main/img/logo_cratos.svg';
 const NavBar = () => {
 
   function cerrarSesion(){
-    alert("cierrosesion");
+    //alert("cierrosesion");
     localStorage.setItem("usuario", "");
     window.location.reload();
   }

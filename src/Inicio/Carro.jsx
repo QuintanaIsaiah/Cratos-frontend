@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Modal, ModalBody } from 'reactstrap';
 
 const Carro = () => {
    
@@ -75,7 +76,7 @@ const Carro = () => {
 
         console.log(resultado.data);
         if(resultado.data === 1){
-          alert ("producto eliminado correctamente");
+          //alert ("producto eliminado correctamente");
           actualizarProductos();
         }
         else{
@@ -83,6 +84,19 @@ const Carro = () => {
         }
       });
   }
+
+  const [mostrarPopup, setMostrarPopup] = useState(false);
+  const [textoPopup, setTextoPopup] = useState('');
+
+  const mostrarPopupCookies = () => {
+    setMostrarPopup(true);
+    setTextoPopup(<> <div className="popupText"> Su compra ha sido realiza correctamente </div></>);
+    };
+
+  const cerrarPopupCookies = () => {
+    setMostrarPopup(false);
+    confirmarCompra();
+  };
 
   //Creamos fncion para que cuando cinfirme compra, se borren los productos del user_carro
   function confirmarCompra(){
@@ -92,7 +106,7 @@ const Carro = () => {
 
         console.log(resultado.data);
         if(resultado.data === 1){
-          alert ("Compra realizada correctamente");
+          //alert ("Tu compra ha sido realizada");
           actualizarProductos();
           //Mande a la home
           history("/");
@@ -145,7 +159,10 @@ const Carro = () => {
             </div>
             
             <div className="tramitar">
-              <input type="button" id="comprar" name="comprar" value="COMPRAR" onClick={confirmarCompra}></input>
+              <input type="button" id="comprar" name="comprar" value="COMPRAR" onClick={mostrarPopupCookies}></input>
+              <Modal isOpen={mostrarPopup} toggle={cerrarPopupCookies} centered>
+                <ModalBody>{textoPopup}</ModalBody>
+              </Modal>
             </div>
             
           </div>

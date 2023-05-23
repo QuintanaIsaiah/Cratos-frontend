@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link} from "react-router-dom";
+import { Modal, ModalBody } from 'reactstrap';
 
 const Productos = () => {
 
@@ -57,6 +58,19 @@ const Productos = () => {
     getProductos();
   }
 
+  //Mensaje producto añadido
+  const [mostrarPopup, setMostrarPopup] = useState(false);
+  const [textoPopup, setTextoPopup] = useState('');
+
+  const mostrarPopupCookies = () => {
+    setMostrarPopup(true);
+    setTextoPopup(<> <div className="popupText"> Se ha añadido el producto en tu carro </div></>);
+  };
+
+  const cerrarPopupCookies = () => {
+    setMostrarPopup(false);
+  };
+
   //Creamos función para añadir productos recibiendo su id por parametro (onclick={()=>añadir(lista[0])})
   function añadirProducto(id) {
 
@@ -71,7 +85,8 @@ const Productos = () => {
           console.log(resultado2.data);
 
           if(resultado2.data === 1){
-              alert("Producto añadido al carro");
+              mostrarPopupCookies();
+              //alert("Producto añadido al carro");
               }
               else{
                   alert("No se ha podido añadir el producto al carro");
@@ -98,7 +113,6 @@ const Productos = () => {
 
   //Creamos constante donde almacene la imagenes en una variable 
   const productosImg = require.context("../img",true);
-
 
   return (
     <div className="t-l-productos">
@@ -143,6 +157,9 @@ const Productos = () => {
           </div>
         ))}
       </div>
+      <Modal isOpen={mostrarPopup} toggle={cerrarPopupCookies} centered>
+        <ModalBody>{textoPopup}</ModalBody>
+      </Modal>
     </div>
   );
 };

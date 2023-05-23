@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
+import { useEffect } from "react";
 //import { functionsIn } from "lodash";
 import { useNavigate } from "react-router-dom";
 
@@ -32,9 +33,32 @@ const ProductosAdminCrear = ({ handleClickProductos }) => {
     setProductos({ ...productos, porcentaje_oferta: event.target.value });
   };
 
+  //PArseamos la imagen a BASE64
+  function convertirImagenABase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+  
+      reader.onload = (event) => {
+        resolve(event.target.result);
+      };
+  
+      reader.onerror = (error) => {
+        reject(error);
+      };
+  
+      reader.readAsDataURL(file);
+    });
+  }
+  //Guardamos la imagen en productos.imagen
   const handleImagenChange = (event) => {
     const file = event.target.files[0];
-    setProductos({ ...productos, imagen: file });
+    convertirImagenABase64(file)
+    .then((base64Image) => {
+      setProductos({ ...productos, imagen: base64Image });
+    })
+    .catch((error) => {
+      console.error("Error al convertir la imagen a base64:", error);
+    });
   };
 
   function crearProductos() {
@@ -46,6 +70,9 @@ const ProductosAdminCrear = ({ handleClickProductos }) => {
     valor[2] = productos.descripcion;
     valor[3] = productos.precio;
     valor[4] = productos.porcentaje_oferta;
+    valor[5] = productos.imagen;
+
+    handleClickProductos();
 
     axios
       .post("http://localhost/Cratos-backend/ProductosAdminCrear.php", valor)
@@ -53,8 +80,7 @@ const ProductosAdminCrear = ({ handleClickProductos }) => {
         console.log("LA PH DEVUELVE : " + resultado2.data);
 
         if (resultado2.data === 1) {
-          //alert("Se ha creado el producto");
-          handleClickProductos();
+            window.location.reload();
         } else {
           alert("Rellena todos los campos para poder crear un producto");
         }
