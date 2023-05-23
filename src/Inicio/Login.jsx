@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Form, Button } from "rsuite";
 import axios from "axios";
 import { USER_LOGIN_URL } from "../shared/routes.js";
 import { Alert } from "reactstrap";
 import { useNavigate } from "react-router-dom";
+import { AddLog } from "../shared/AddLog.js";
 
 const Login = () => {
   const [usuario, setUsuario] = useState("");
@@ -11,6 +12,7 @@ const Login = () => {
 
   const [completado, setCompletado] = useState("");
   const [error, setError] = useState("");
+
   const history = useNavigate();
 
   const hideAlerts = () => {
@@ -35,34 +37,22 @@ const Login = () => {
         }
       );
 
-      console.log(response);
+      localStorage.setItem("usuario", response.data.resultado.nombre);
 
       const usuarioResponse = response.data.resultado;
 
       if (usuarioResponse.admin === "0") {
-        /*PRUEBA SESION*/
-        let valor = { usuario: usuario };
-        axios
-          .post("http://localhost/Cratos-backend/Usuario.php", valor)
-          .then((resultado) => {
-            console.log("EL RESULTADO ES : " + resultado.data);
-            // Almacenar el nombre de usuario en el almacenamiento local
-            localStorage.setItem("usuario", resultado.data);
-            // Recargar la página para ver los cambios aplicados
-            //window.location.reload();
-          });
-        //REDIRECCIONAR AL MAIN NORMAL
         history("/");
         window.location.reload();
-        console.log("USUARIO COMUN");
       } else if (usuarioResponse.admin === "1") {
-        //REDIRECCIONAR AL MAIN ADMIN
-        console.log("USUARIO ADMINISTRADOR");
         history("/MainAdmin");
+        window.location.reload();
       }
 
       if (response.data.code === 0) {
-        setCompletado("Inicio de sesion correcto.");
+        setCompletado("Inicio de sesión correcto.");
+        // SE REGISTRA LOG DE INICIO DE SESION
+        AddLog(response.data.resultado.nombre, "Log In");
       } else {
         setError("Credenciales incorrectas.");
       }
@@ -96,7 +86,7 @@ const Login = () => {
           <Form.ControlLabel>Contraseña</Form.ControlLabel>
           <Form.Control
             name="contrasenya"
-            type="contrasenya"
+            type="password"
             onChange={(value) => setContrasenya(value)}
           />
           <Form.HelpText>Required</Form.HelpText>

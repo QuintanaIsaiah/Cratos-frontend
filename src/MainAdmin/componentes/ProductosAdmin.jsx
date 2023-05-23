@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { AddLog } from "../../shared/AddLog";
 //import { useNavigate } from "react-router-dom";
 
 const ProductosAdmin = ({
@@ -24,7 +25,6 @@ const ProductosAdmin = ({
     axios
       .get("http://localhost/Cratos-backend/productosAdmin.php")
       .then(function (resultado) {
-        // console.log(resultado);
         setProductos({ lista: resultado.data });
       });
   }
@@ -41,9 +41,12 @@ const ProductosAdmin = ({
     axios
       .post("http://localhost/Cratos-backend/ProductosAdminEliminar.php", valor)
       .then(function (resultado) {
-        console.log(resultado.data);
         if (resultado.data === 1) {
           //alert ("producto eliminado correctamente");
+          AddLog(
+            localStorage.getItem("usuario"),
+            `Delete product with id ${valor}`
+          );
           actualizarProductos();
         } else {
           alert("No se ha podido eliminar el producto");

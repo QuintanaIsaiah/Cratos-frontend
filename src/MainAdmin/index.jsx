@@ -1,117 +1,82 @@
 import { useState } from "react";
 import MenuHorizontal from "./componentes/MenuHorizontal";
-
-// PRODUCTOS
 import ProductosAdmin from "./componentes/ProductosAdmin";
 import ProductosAdminActualizar from "./componentes/ProductosAdminActualizar";
 import ProductosAdminCrear from "./componentes/ProductosAdminCrear";
-
-// USUARIOS
 import UsuariosAdmin from "./componentes/UsuariosAdmin";
 import UsuariosAdminActualizar from "./componentes/UsuariosAdminActualizar";
 import UsuariosAdminCrear from "./componentes/UsuariosAdminCrear";
-//import UsuariosAdminCrear from "./componentes/UsuariosAdminCrear";
 
 const MainAdmin = () => {
-  const [mostrarProductos, setMostrarProductos] = useState(false);
-  const [mostrarProductosCrear, setMostrarProductosCrear] = useState(false);
-  const [mostrarProductosActualizar, setMostrarProductosActualizar] =
-    useState(false);
-  const [mostrarUsuarios, setMostrarUsuarios] = useState(false);
-  const [mostrarUsuariosCrear, setMostrarUsuariosCrear] = useState(false);
-  const [mostrarUsuariosActualizar, setMostrarUsuariosActualizar] =
-    useState(false);
+  const [mostrarComponente, setMostrarComponente] = useState(null);
 
-  const handleClickProductos = () => {
-    setMostrarProductos(true);
-    setMostrarProductosCrear(false);
-    setMostrarProductosActualizar(false);
-    setMostrarUsuarios(false);
-    setMostrarUsuariosCrear(false);
-    setMostrarUsuariosActualizar(false);
+  const mostrarProductos = () => {
+    setMostrarComponente("productos");
   };
 
-  const handleClickProductosCrear = () => {
-    setMostrarProductos(false);
-    setMostrarProductosCrear(true);
-    setMostrarProductosActualizar(false);
-    setMostrarUsuarios(false);
-    setMostrarUsuariosCrear(false);
-    setMostrarUsuariosActualizar(false);
+  const mostrarProductosCrear = () => {
+    setMostrarComponente("productosCrear");
   };
 
-  const handleClickProductosActualizar = () => {
-    setMostrarProductos(false);
-    setMostrarProductosCrear(false);
-    setMostrarProductosActualizar(true);
-    setMostrarUsuarios(false);
-    setMostrarUsuariosCrear(false);
-    setMostrarUsuariosActualizar(false);
+  const mostrarProductosActualizar = () => {
+    setMostrarComponente("productosActualizar");
   };
 
-  const handleClickUsuarios = () => {
-    setMostrarProductos(false);
-    setMostrarProductosCrear(false);
-    setMostrarProductosActualizar(false);
-    setMostrarUsuarios(true);
-    setMostrarUsuariosCrear(false);
-    setMostrarUsuariosActualizar(false);
+  const mostrarUsuarios = () => {
+    setMostrarComponente("usuarios");
   };
 
-  const handleClickUsuariosCrear = () => {
-    console.log("handleClickUsuariosCrear");
-    setMostrarProductos(false);
-    setMostrarProductosCrear(false);
-    setMostrarProductosActualizar(false);
-    setMostrarUsuarios(false);
-    setMostrarUsuariosCrear(true);
-    setMostrarUsuariosActualizar(false);
+  const mostrarUsuariosCrear = () => {
+    setMostrarComponente("usuariosCrear");
   };
 
-  const handleClickUsuariosActualizar = () => {
-    setMostrarProductos(false);
-    setMostrarProductosCrear(false);
-    setMostrarProductosActualizar(false);
-    setMostrarUsuarios(false);
-    setMostrarUsuariosCrear(false);
-    setMostrarUsuariosActualizar(true);
+  const mostrarUsuariosActualizar = () => {
+    setMostrarComponente("usuariosActualizar");
+  };
+
+  const renderComponente = () => {
+    switch (mostrarComponente) {
+      case "productos":
+        return (
+          <ProductosAdmin
+            handleClickProductosCrear={mostrarProductosCrear}
+            handleClickProductosActualizar={mostrarProductosActualizar}
+          />
+        );
+      case "productosCrear":
+        return <ProductosAdminCrear handleClickProductos={mostrarProductos} />;
+      case "productosActualizar":
+        return (
+          <ProductosAdminActualizar handleClickProductos={mostrarProductos} />
+        );
+      case "usuarios":
+        return (
+          <UsuariosAdmin
+            handleClickUsuariosCrear={mostrarUsuariosCrear}
+            handleClickUsuariosActualizar={mostrarUsuariosActualizar}
+          />
+        );
+      case "usuariosCrear":
+        return <UsuariosAdminCrear handleClickUsuarios={mostrarUsuarios} />;
+      case "usuariosActualizar":
+        return (
+          <UsuariosAdminActualizar handleClickUsuarios={mostrarUsuarios} />
+        );
+      default:
+        return null;
+    }
   };
 
   return (
     <div>
       {/* MENU CABECERA */}
       <MenuHorizontal
-        handleClickUsuarios={handleClickUsuarios}
-        handleClickProductos={handleClickProductos}
+        handleClickUsuarios={mostrarUsuarios}
+        handleClickProductos={mostrarProductos}
       />
-      {/* PRODUCTOS */}
-      {mostrarProductos && (
-        <ProductosAdmin
-          handleClickProductosCrear={handleClickProductosCrear}
-          handleClickProductosActualizar={handleClickProductosActualizar}
-        />
-      )}
-      {mostrarProductosCrear && (
-        <ProductosAdminCrear handleClickProductos={handleClickProductos} />
-      )}
-      {mostrarProductosActualizar && (
-        <ProductosAdminActualizar handleClickProductos={handleClickProductos} />
-      )}
-      {/* USUARIOS */}
-      {mostrarUsuarios && (
-        <UsuariosAdmin
-          handleClickUsuariosCrear={handleClickUsuariosCrear}
-          handleClickUsuariosActualizar={handleClickUsuariosActualizar}
-        />
-      )}
 
-      {mostrarUsuariosActualizar && (
-        <UsuariosAdminActualizar handleClickUsuarios={handleClickUsuarios} />
-      )}
-
-      {mostrarUsuariosCrear && (
-        <UsuariosAdminCrear handleClickUsuarios={handleClickUsuarios} />
-      )}
+      {/* Renderizar componente */}
+      {renderComponente()}
     </div>
   );
 };

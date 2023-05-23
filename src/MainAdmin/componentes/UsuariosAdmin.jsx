@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 //import { useNavigate } from "react-router-dom";
 import { Table, Button } from "rsuite";
+import { AddLog } from "../../shared/AddLog";
 
 const ProductosAdmin = ({
   handleClickUsuariosCrear,
@@ -24,7 +25,6 @@ const ProductosAdmin = ({
     axios
       .get("http://localhost/Cratos-backend/UsuariosAdmin.php")
       .then(function (resultado) {
-        // console.log(resultado);
         setUsuarios({ lista: resultado.data });
       });
   }
@@ -39,9 +39,12 @@ const ProductosAdmin = ({
     axios
       .post("http://localhost/Cratos-backend/UsuariosAdminEliminar.php", valor)
       .then(function (resultado) {
-        console.log(resultado.data);
         if (resultado.data === 1) {
           //alert ("producto eliminado correctamente");
+          AddLog(
+            localStorage.getItem("usuario"),
+            `Delete user with id ${valor}`
+          );
           actualizarUsuarios();
         } else {
           alert("No se ha podido eliminar el producto");
