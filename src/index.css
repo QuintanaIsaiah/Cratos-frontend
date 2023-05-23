@@ -175,6 +175,9 @@ code {
   display: inline-block;
   margin-left: 50px;
 }
+.c-imagen-array img{
+  width: 40px;
+}
 
 /* Main */
 

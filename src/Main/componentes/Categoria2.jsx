@@ -50,7 +50,11 @@ const Categoria1 = () => {
             <div className="p_titulo">
               <h3>{listado[1]}</h3>
             </div>
-            <div className="p_img">{listado[1] + ".png"}</div>
+            <div className="p_img">{listado[6] ? (
+                  <img src={listado[6]} />
+                ) : (
+                  "No se ha encontrado imagen"
+                )}</div>
             <div id="prueba" className="p_descripcion">
               {listado[3]}
             </div>
