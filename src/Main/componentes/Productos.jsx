@@ -109,21 +109,14 @@ const Productos = () => {
             </div>
 
             <div className="p_img">
-              {listado[1] &&
-              productosImg.keys().includes(`./${listado[1]}.jpg`) ? (
-                <img
-                  className="p_img_size"
-                  src={productosImg(`./${listado[1]}.jpg`)}
-                  alt={listado[1]}
-                />
-              ) : (
-                <p>Imagen no encontrada</p>
-              )}
+                {listado[6] ? (
+                  <img src={listado[6]} />
+                ) : (
+                  "No se ha encontrado imagen"
+                )}
             </div>
 
-            <div id="prueba" className="p_descripcion">
-              {listado[3]}
-            </div>
+            
             <div className="p_precio">Precio : {listado[4] + "€"}</div>
             <ul className="p_botones">
               <li>cat: {listado[2]}</li>

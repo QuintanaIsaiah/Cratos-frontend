@@ -70,13 +70,13 @@ const Main = () => {
           <h3>Todos los productos</h3>
         </div>
         <div onClick={seleccionarCat1}>
-          <h3>Categoria 1</h3>
+          <h3>Natación</h3>
         </div>
         <div onClick={seleccionarCat2}>
-          <h3>Categoria 2</h3>
+          <h3>Surf</h3>
         </div>
         <div onClick={seleccionarCat3}>
-          <h3>Categoria 3</h3>
+          <h3>Esquí Acuático</h3>
         </div>
       </div>
       <div className="m-productos">

@@ -42,6 +42,7 @@ const Carro = () => {
       axios
         .post("http://localhost/Cratos-backend/mostrar_carro.php", idUser)
         .then(function (resultado) {
+          console.log(resultado.data);
           setProductos({ lista: resultado.data });
         });
     } else {
@@ -117,8 +118,6 @@ const Carro = () => {
       });
   }
 
-  //Creamos constante donde almacene la imagenes en una variable
-  const productosImg = require.context("../Main/img", true);
 
   if (productos.lista.length === 0) {
     return (
@@ -215,17 +214,12 @@ const Carro = () => {
                 <div className="c-lista">
                   <div>{listado[1]}</div>
                   <div>{listado[2]}</div>
-                  <div>
-                    {listado[1] &&
-                    productosImg.keys().includes(`./${listado[1]}.jpg`) ? (
-                      <img
-                        className="c_img"
-                        src={productosImg(`./${listado[1]}.jpg`)}
-                        alt={listado[1]}
-                      />
-                    ) : (
-                      <p className="c_p">Imagen no encontrada</p>
-                    )}
+                  <div className="c-imagen-array">
+                  {listado[6] ? (
+                    <img src={listado[6]} />
+                  ) : (
+                    "No se ha encontrado imagen"
+                  )}
                   </div>
                   {/*<div>{listado[3]}</div>*/}
                   <div>{listado[4] + "€"}</div>
