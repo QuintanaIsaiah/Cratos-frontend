@@ -1,4 +1,5 @@
 import axios from "axios";
+import dayjs from "dayjs";
 
 export const AddLog = async (nombre, accion) => {
   try {
@@ -7,6 +8,7 @@ export const AddLog = async (nombre, accion) => {
       await axios.post("http://localhost/Cratos-backend/Log/AddLog.php", {
         usuario: nombre,
         accion: accion,
+        fecha: dayjs().format("YYYY-MM-DD HH:mm:ss"),
       });
     }
   } catch {
