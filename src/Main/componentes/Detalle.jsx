@@ -98,11 +98,18 @@ const Detalle = () => {
                 )}
             
           </div>
+          <hr className="line_Vertical"/>
           <div className="descripcion_detalle">
             <h2 className="Nombre_Detalle">{item[1]}</h2>
-            <p>{item[2]}</p>
-            {/* No hay campo "price" en los datos */}
+            <strong>Categoría:</strong><p>{item[2]}</p>
+            <strong>Descripción:</strong><p className="d_descripcion">{item[3]}</p>
+            <strong>Precio:</strong><p className="d_descripcion">{item[4]}€</p>
+            <strong>Precio Final:</strong><p className="d_descripcion">{" "}
+                {item[4] - (item[4] * item[5]) / 100 + "€"}</p>
+            <p><em>*Todos nuestros productos se pueden adaptar</em> <br /><em> a las medidas de nuestros clientes.</em><br />
+            <em>Contacte con nuestro servicio personalizado:</em><br /><strong> 555-678-945 </strong></p>
             <input
+              className="carrito_Ver"
               type="button"
               id="añadir"
               name="añadir"

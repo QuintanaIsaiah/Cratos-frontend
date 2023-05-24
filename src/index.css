@@ -28,7 +28,7 @@ code {
 }
 
 .logo img {
-  width: 170px; /* cambiar el valor de acuerdo al tamaño deseado */
+  width: 170px; 
   height: auto;
   margin-left: 60px;
   margin-top: -1px;
@@ -309,10 +309,37 @@ code {
   width: 600px;
   height: 600px;
   margin-right: 70px;
-  margin-left: 400px;
+  margin-left: 300px;
   margin-top: 50px;
   margin-bottom: 70px;
   
+}
+
+.line_Vertical {
+    border:         none;
+    border-left:    1px solid hsla(200, 10%, 50%,100);
+    height:         700px;
+    width:          1px; 
+    margin-right: 100px;
+}
+
+
+.descripcion_detalle {
+  
+  margin-top: -10px;
+}
+
+.Nombre_Detalle{
+  /*margin-top: -50px;*/
+  margin-bottom: 20px;
+}
+
+.d_descripcion {
+  width: 300px;
+}
+
+.carrito_Ver {
+  margin-top: 40px;
 }
 
 /**/
