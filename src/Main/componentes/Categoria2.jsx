@@ -42,7 +42,7 @@ const Categoria1 = () => {
 
   return (
     <div className="t-l-cat2">
-      <h2 onClick={actualizarProductos}>Categoria 2</h2>
+      <h2 onClick={actualizarProductos}>Surf</h2>
 
       <div className="contenedor_producto">
         {productos.lista.map((listado, key) => (
@@ -55,9 +55,6 @@ const Categoria1 = () => {
                 ) : (
                   "No se ha encontrado imagen"
                 )}</div>
-            <div id="prueba" className="p_descripcion">
-              {listado[3]}
-            </div>
             <div className="p_precio">Precio : {listado[4] + "€"}</div>
             <ul className="p_botones">
               <li>cat: {listado[2]}</li>

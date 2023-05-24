@@ -116,9 +116,7 @@ const Productos = () => {
                 )}
             </div>
 
-            <div id="prueba" className="p_descripcion">
-              {listado[3]}
-            </div>
+            
             <div className="p_precio">Precio : {listado[4] + "€"}</div>
             <ul className="p_botones">
               <li>cat: {listado[2]}</li>

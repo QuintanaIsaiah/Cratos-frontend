@@ -434,11 +434,14 @@ code {
   background-color: white;
   width: 80%;
   margin-left: 10%;
-  height: 300px;
+  height: 400px;
 }
 .p_img_size {
   width: 300px;
 }
+  .p_img img{
+    width: 400px;
+  }
 .p_descripcion {
   background-color: #697984;
   border-radius: 12px;
@@ -452,6 +455,7 @@ code {
   padding: 1%;
   margin: 2%;
   font-size: 20px;
+  padding-top: 10px;
 }
 .p_botones {
   text-align: left;
