@@ -56,7 +56,7 @@ const ProductosAdminActualizar = ({ handleClickProductos }) => {
             `Update product with id ${id_producto_admin}`
           );
         } else {
-          alert("No se ha podido actualizar el producto");
+          //alert("No se ha podido actualizar el producto");
         }
       });
   }

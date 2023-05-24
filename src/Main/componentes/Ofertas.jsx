@@ -83,7 +83,8 @@ const Ofertas = () => {
           if (resultado2.data === 1) {
             mostrarPopupCookies("Se ha añadido el producto en tu carro");
           } else {
-            alert("No se ha podido añadir el producto al carro");
+            //alert("No se ha podido añadir el producto al carro");
+            mostrarPopupCookies("Inicia sesión para poder comprar nuestros productos");
           }
         });
     } else {

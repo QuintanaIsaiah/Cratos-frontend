@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Modal, ModalBody } from "reactstrap";
 
 const Categoria1 = () => {
   const [productos, setProductos] = useState({
@@ -27,18 +29,72 @@ const Categoria1 = () => {
     getProductos();
   }
 
-  //Creamos función para añadir productos recibiendo su id por parametro (onclick={()=>añadir(lista[0])})
+  const [nombreUsuario, setNombreUsuario] = useState("");
+
+  const [idUser, setidUser] = useState("");
+
+  useEffect(() => {
+    const usuarioAlmacenado = localStorage.getItem("usuario");
+    if (usuarioAlmacenado) {
+      setNombreUsuario(usuarioAlmacenado);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (nombreUsuario) {
+      axios
+        .post("http://localhost/Cratos-backend/Usuario_Mostrar.php", {
+          usuario: nombreUsuario,
+        })
+        .then((response) => {
+          setidUser(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [nombreUsuario]);
+
   function añadirProducto(id) {
-    axios
-      .post("http://localhost/Cratos-backend/a%C3%B1adirAcarro.php", id)
-      .then(function (resultado) {
-        if (resultado.data === 1) {
-          alert("Producto añadido al carro");
-        } else {
-          alert("No se ha podido añadir el producto al carro");
-        }
-      });
+    if (nombreUsuario) {
+      let valor = [];
+      valor[0] = idUser;
+      valor[1] = id;
+      axios
+        .post("http://localhost/Cratos-backend/AnyadirAcarro.php", valor)
+        .then((resultado2) => {
+          if (resultado2.data === 1) {
+            mostrarPopupCookies("Se ha añadido el producto en tu carro");
+            //alert("Producto añadido al carro");
+          } else {
+            mostrarPopupCookies("Inicia sesión para poder comprar nuestros productos");
+            //alert("Eror");
+          }
+        });
+    } else {
+      mostrarPopupCookies("Inicia sesión para poder comprar nuestros productos");
+      //alert("hola");
+    }
   }
+
+  //Mensaje producto añadido
+  const [mostrarPopup, setMostrarPopup] = useState(false);
+  const [textoPopup, setTextoPopup] = useState("");
+
+  const mostrarPopupCookies = (mensaje) => {
+    let ms = mensaje;
+    setMostrarPopup(true);
+    setTextoPopup(
+      <>
+        {" "}
+        <div className="popupText"> {ms} </div>
+      </>
+    );
+  };
+
+  const cerrarPopupCookies = () => {
+    setMostrarPopup(false);
+  };
 
   return (
     <div className="t-l-cat2">
@@ -68,12 +124,22 @@ const Categoria1 = () => {
                 ></input>
               </li>
               <li>
-                <input type="button" id="ver" name="ver" value="VER"></input>
+              <Link
+                  to={`/Detalle/producto/${listado[0]}`}
+                  className="ver-btn"
+                >
+                  <button type="button" id="ver" name="ver">
+                    VER
+                  </button>
+                </Link>
               </li>
             </ul>
           </div>
         ))}
       </div>
+      <Modal isOpen={mostrarPopup} toggle={cerrarPopupCookies} centered>
+        <ModalBody>{textoPopup}</ModalBody>
+      </Modal>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import React from "react";
 import Banner from "./Banner";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { Modal, ModalBody } from "reactstrap";
 
 const Detalle = () => {
   const [nombreUsuario, setNombreUsuario] = useState("");
@@ -39,13 +40,15 @@ const Detalle = () => {
         .post("http://localhost/Cratos-backend/AnyadirAcarro.php", valor)
         .then((resultado2) => {
           if (resultado2.data === 1) {
-            alert("Producto añadido al carro");
+            //alert("Producto añadido al carro");
+            mostrarPopupCookies("Se ha añadido el producto en tu carro");
           } else {
-            alert("No se ha podido añadir el producto al carro");
+            mostrarPopupCookies("Inicia sesión para poder comprar nuestros productos");
           }
         });
     } else {
-      alert("No se puede añadir al carro, no tiene usuario");
+      //alert("No se puede añadir al carro, no tiene usuario");
+      mostrarPopupCookies("Inicia sesión para poder comprar nuestros productos");
     }
   }
 
@@ -82,6 +85,25 @@ const Detalle = () => {
   }, [id, productos]);
 
   const productosImg = require.context("../img", true);
+
+  //Mensaje producto añadido
+  const [mostrarPopup, setMostrarPopup] = useState(false);
+  const [textoPopup, setTextoPopup] = useState("");
+
+  const mostrarPopupCookies = (mensaje) => {
+    let ms = mensaje;
+    setMostrarPopup(true);
+    setTextoPopup(
+      <>
+        {" "}
+        <div className="popupText"> {ms} </div>
+      </>
+    );
+  };
+
+  const cerrarPopupCookies = () => {
+    setMostrarPopup(false);
+  };
 
   return (
     <div className="container_detalle">
@@ -123,6 +145,9 @@ const Detalle = () => {
         <p>Cargando producto...</p>
       )}
       <hr className="line_Ver1"/>
+      <Modal isOpen={mostrarPopup} toggle={cerrarPopupCookies} centered>
+        <ModalBody>{textoPopup}</ModalBody>
+      </Modal>
     </div>
   );
 };

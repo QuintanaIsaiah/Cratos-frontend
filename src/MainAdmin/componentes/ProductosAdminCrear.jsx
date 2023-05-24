@@ -44,19 +44,19 @@ const ProductosAdminCrear = ({ handleClickProductos }) => {
     console.log("valor");
     console.log(valor);
 
-    handleClickProductos();
 
     axios
       .post("http://localhost/Cratos-backend/ProductosAdminCrear.php", valor)
       .then((resultado2) => {
+        console.log("DEVUELVE : "+resultado2.data);
         if (resultado2.data === 1) {
-          window.location.reload();
+          handleClickProductos();
           AddLog(
             localStorage.getItem("usuario"),
             `Create new product named ${productos.nombre}`
           );
         } else {
-          alert("Rellena todos los campos para poder crear un producto");
+          //alert("No se ha podido actualizar el producto");
         }
       });
   }

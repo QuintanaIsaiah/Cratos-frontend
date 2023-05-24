@@ -59,12 +59,13 @@ const Productos = () => {
   const [mostrarPopup, setMostrarPopup] = useState(false);
   const [textoPopup, setTextoPopup] = useState("");
 
-  const mostrarPopupCookies = () => {
+  const mostrarPopupCookies = (mensaje) => {
+    let ms = mensaje;
     setMostrarPopup(true);
     setTextoPopup(
       <>
         {" "}
-        <div className="popupText"> Se ha añadido el producto en tu carro </div>
+        <div className="popupText"> {ms} </div>
       </>
     );
   };
@@ -83,14 +84,14 @@ const Productos = () => {
         .post("http://localhost/Cratos-backend/AnyadirAcarro.php", valor)
         .then((resultado2) => {
           if (resultado2.data === 1) {
-            mostrarPopupCookies();
+            mostrarPopupCookies("Se ha añadido el producto en tu carro");
             //alert("Producto añadido al carro");
           } else {
-            alert("No se ha podido añadir el producto al carro");
+            mostrarPopupCookies("Inicia sesión para poder comprar nuestros productos");
           }
         });
     } else {
-      alert("No se puede añadir al carro , no tiene user");
+      mostrarPopupCookies("Inicia sesión para poder comprar nuestros productos");
     }
   }
 

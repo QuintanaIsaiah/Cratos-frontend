@@ -49,7 +49,7 @@ const ProductosAdmin = ({
           );
           actualizarProductos();
         } else {
-          alert("No se ha podido eliminar el producto");
+          //alert("No se ha podido eliminar el producto");
         }
       });
   }
