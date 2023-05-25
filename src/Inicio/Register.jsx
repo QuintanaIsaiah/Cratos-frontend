@@ -70,6 +70,7 @@ const Register = () => {
       AddLog(response.data.resultado.nombre, "Registered");
       history("/");
     } catch (error) {
+      history("/Login");
       setError(
         "No se pudo registrar el usuario. Por favor, inténtelo de nuevo."
       );
